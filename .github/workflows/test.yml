@@ -1,0 +1,16 @@
+name: test
+
+on:
+  push:
+    branches: [main, dev]
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    environment: action
+    steps:
+      - name: test-step
+        run: |
+          echo "Checking PR Title: $PR_TITLE"
+          echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
+          echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
