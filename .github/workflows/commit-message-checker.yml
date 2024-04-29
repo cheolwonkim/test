@@ -3,13 +3,13 @@ name: PR Title and Commit Messages Checker
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
-env: 
-      COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
-      PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^\s]+$'
 
 jobs:
   validate-messages:
     runs-on: ubuntu-latest
+    env:
+      COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
+      PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^\s]+$'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,8 +18,8 @@ jobs:
         id: title_check
         run: |
           PR_TITLE="${{ github.event.pull_request.title }}"
-          echo "Checking PR Title: $PR_TITLE"
-          echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
+          echo "Checking PR Title: ${env.PR_TITLE}"
+          echo "PR_TITLE_PATTERN: ${PR_TITLE_PATTERN}"
           echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
 
           if echo $PR_TITLE | grep -Pq $PR_TITLE_PATTERN; then
@@ -29,9 +29,6 @@ jobs:
           else
             echo "::set-output name=match::false"
           fi
-        env:
-          PR_TITLE_PATTERN: ${{ env.PR_TITLE_PATTERN }}
-          COMMIT_MESSAGE_PATTERN: ${{ env.COMMIT_MESSAGE_PATTERN }}
 
       - name: Final Check
         if: steps.title_check.outputs.match == 'false'
