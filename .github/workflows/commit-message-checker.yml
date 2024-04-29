@@ -1,35 +1,31 @@
-name: PR Title and Commit Messages Checker
+name: PR Title Validation
 
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
 
 jobs:
-  validate-messages:
+  check-pr-title:
     runs-on: ubuntu-latest
-    env:
-      COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
-      PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^\s]+$'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Validate PR Title
-        id: title_check
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
+          PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^\s]+$'
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
           echo "Checking PR Title: $PR_TITLE"
           echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
           echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
 
-          if echo "$PR_TITLE" | grep -Eq "$PR_TITLE_PATTERN"; then
-            echo "::set-output name=match::true"
+          if echo "$PR_TITLE" | grep -Pq "$PR_TITLE_PATTERN"; then
+            echo "PR title matches required format."
+          elif echo "$PR_TITLE" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
+            echo "PR title matches commit message format."
           else
-            echo "::set-output name=match::false"
+            echo "PR Title does not match any required format."
+            exit 1
           fi
-
-      - name: Final Check
-        if: steps.title_check.outputs.match == 'false'
-        run: |
-          echo "PR Title does not match any required format"
-          exit 1
