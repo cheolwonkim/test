@@ -1,11 +1,11 @@
-name: Commit Message Checker
+aname: Commit Message Checker
 
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
 
 jobs:
-  check-pr-title:
+  check-message:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
