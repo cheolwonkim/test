@@ -15,9 +15,9 @@ jobs:
       - name: Check message
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-          COMMIT_MESSAGE_PATTERN: ${{ vars.COMMIT_MESSAGE_PATTERN }}
-          PR_TITLE_PATTERN: ${{ vars.PR_TITLE_PATTERN }}
-          RELEASE_PATTERN: ${{ vars.RELEASE_PATTERN }}
+          COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
+          PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^]+$'
+          RELEASE_PATTERN: '^(Release)[^]+$'
         run: |
           echo "Checking PR Title: $PR_TITLE"
           echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
