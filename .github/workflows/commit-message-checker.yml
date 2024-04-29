@@ -18,13 +18,11 @@ jobs:
         id: title_check
         run: |
           PR_TITLE="${{ github.event.pull_request.title }}"
-          echo "Checking PR Title: ${env.PR_TITLE}"
-          echo "PR_TITLE_PATTERN: ${PR_TITLE_PATTERN}"
+          echo "Checking PR Title: $PR_TITLE"
+          echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
           echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
 
-          if echo $PR_TITLE | grep -Pq $PR_TITLE_PATTERN; then
-            echo "::set-output name=match::true"
-          elif echo $PR_TITLE | grep -Pq $COMMIT_MESSAGE_PATTERN; then
+          if echo "$PR_TITLE" | grep -Eq "$PR_TITLE_PATTERN"; then
             echo "::set-output name=match::true"
           else
             echo "::set-output name=match::false"
