@@ -7,6 +7,7 @@ on:
 jobs:
   validate-messages:
     runs-on: ubuntu-latest
+    environment: env
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,9 +27,6 @@ jobs:
           else
             echo "::set-output name=match::false"
           fi
-        env:
-          PR_TITLE_PATTERN: ${{ env.PR_TITLE_PATTERN }}
-          COMMIT_MESSAGE_PATTERN: ${{ env.COMMIT_MESSAGE_PATTERN }}
 
       - name: Final Check
         if: steps.title_check.outputs.match == 'false'
