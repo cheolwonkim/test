@@ -7,6 +7,7 @@ on:
 jobs:
   check-message:
     runs-on: ubuntu-latest
+    environment: action
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -14,9 +15,9 @@ jobs:
       - name: Check message
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-          COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
-          PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^]+$'
-          RELEASE_PATTERN: '^(Release)[^]+$'
+          COMMIT_MESSAGE_PATTERN: ${{ vars.COMMIT_MESSAGE_PATTERN }}
+          PR_TITLE_PATTERN: ${{ vars.PR_TITLE_PATTERN }}
+          RELEASE_PATTERN: ${{ vars.RELEASE_PATTERN }}
         run: |
           echo "Checking PR Title: $PR_TITLE"
           echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
