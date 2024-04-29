@@ -12,5 +12,5 @@ jobs:
       - name: test-step
         run: |
           echo "Checking PR Title: $PR_TITLE"
-          echo "PR_TITLE_PATTERN: ${{ env.PR_TITLE_PATTERN }}"
+          echo "PR_TITLE_PATTERN: ${{ vars.PR_TITLE_PATTERN }}"
           echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
