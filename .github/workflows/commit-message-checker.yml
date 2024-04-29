@@ -1,4 +1,4 @@
-name: PR Title Validation
+name: Commit Message Checker
 
 on:
   pull_request:
@@ -11,11 +11,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Validate PR Title
+      - name: Check message
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
           COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
-          PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^\s]+$'
+          PR_TITLE_PATTERN: '^(Fix|Feat|Hotfix)\/[^]+$'
+          RELEASE_PATTERN: '^(Release)[^]+$'
         run: |
           echo "Checking PR Title: $PR_TITLE"
           echo "PR_TITLE_PATTERN: $PR_TITLE_PATTERN"
@@ -25,6 +26,8 @@ jobs:
             echo "PR title matches required format."
           elif echo "$PR_TITLE" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
             echo "PR title matches commit message format."
+          elif echo "$PR_TITLE" | grep -Pq "$RELEASE_PATTERN"; then
+            echo "PR title matches release format."
           else
             echo "PR Title does not match any required format."
             exit 1
