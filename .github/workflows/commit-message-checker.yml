@@ -16,7 +16,7 @@ jobs:
         run: |
           PR_TITLE="${{ github.event.pull_request.title }}"
           echo "Checking PR Title: $env.PR_TITLE"
-          echo "PR_TITLE_PATTERN: $env.PR_TITLE_PATTERN"
+          echo "PR_TITLE_PATTERN: ${{ env.PR_TITLE_PATTERN }}"
           echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
 
           if echo $PR_TITLE | grep -Pq $PR_TITLE_PATTERN; then
