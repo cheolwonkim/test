@@ -1,3 +1,15 @@
+## v0.3.0 (2024-04-30)
+
+
+- Merge pull request #16 from cheolwonkim/ci/test
+- fix: test 5
+- ci: test 3
+- fix: test 3
+- feat: test 1
+- Merge pull request #15 from cheolwonkim/ci/test
+- Fix/test bump test
+- ci: bump test
+
 ## v0.2.6 (2024-04-30)
 
 

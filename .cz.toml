@@ -5,7 +5,7 @@ bump_pattern = "^(break|fix|feat|Fix|Feat|Hotfix)"
 bump_message = "Bump version: $current_version to $new_version"
 bump_map = {"break" = "MAJOR", "Feat" = "MINOR", "feat" = "MINOR", "Fix" = "PATCH", "fix" = "PATCH"}
 tag_format = "v$major.$minor.$patch$prerelease"
-version = "0.2.6"
+version = "0.3.0"
 version_scheme = "semver"
 update_changelog_on_bump = true
 major_version_zero = false
