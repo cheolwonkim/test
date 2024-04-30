@@ -3,10 +3,7 @@ name: Bump version
 on:
   push:
     branches:
-      - main
-
-permissions:
-  contents: write
+      - master
 
 jobs:
   bump_version:
@@ -14,10 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     name: "Bump version and create changelog"
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Conventional Changelog Action
-        uses: TriPSs/conventional-changelog-action@v5
+      - name: Check out
+        uses: actions/checkout@v3
         with:
-          github-token: ${{ secrets.github_token }}
+          fetch-depth: 0
+          token: "${{ secrets.GITHUB_TOKEN }}"
+      - id: cz
+        name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print Version
+        run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
