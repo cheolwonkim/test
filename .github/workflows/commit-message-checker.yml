@@ -33,3 +33,16 @@ jobs:
             echo "PR Title does not match any required format."
             exit 1
           fi
+
+          echo "Fetching PR commits..."
+          PR_COMMITS_URL=${{ github.event.pull_request.commits_url }}
+          echo "Commits URL: $PR_COMMITS_URL"
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $PR_COMMITS_URL > commits.json
+          jq -r '.[].commit.message' commits.json | while read commit_message; do
+            echo "Checking commit message: $commit_message"
+            if ! echo "$commit_message" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
+              echo "Commit message does not match the required format."
+              exit 1
+            fi
+          done
+          echo "All commit messages match the required format."
