@@ -28,6 +28,7 @@ jobs:
 
       - name: Calculate next version
         run: |
+          echo cz bump --dry-run
           echo "NEXT_VERSION=$(cz bump --dry-run | grep 'bump:' | sed -E 's/.*→ (.*)/\1/')" >> $GITHUB_ENV
 
       - name: Print Version
