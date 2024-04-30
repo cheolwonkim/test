@@ -26,11 +26,27 @@ jobs:
       - name: Install Commitizen
         run: pip install commitizen
 
-      - name: Calculate next version
+      - name: Dry run next version
         run: |
           DRY_RUN_OUTPUT=$(cz bump --dry-run)
           NEXT_VERSION=$(echo "$DRY_RUN_OUTPUT" | grep 'Bump version' | sed -E 's/.*to ([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
           echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+
+      - name: Update version file
+        run: |
+          if [ -f "src/version.py" ]; then
+            sed -i "s/__version__ = .*/__version__ = \"${{ env.NEXT_VERSION }}\"/" src/version.py
+          elif [ -f "src/release.ver" ]; then
+            echo "${{ env.NEXT_VERSION }}" > src/release.ver
+          fi
+          git add .
+
+      - name: Bump version
+        run: |
+          cz bump --yes
+          git push
+          git push --tag
+
 
       - name: Print Version
         run: echo "Bumped to version ${{ env.NEXT_VERSION }}"
