@@ -34,10 +34,14 @@ jobs:
 
       - name: Update version file
         run: |
-          if [ -f "src/version.py" ]; then
-            sed -i "s/__version__ = .*/__version__ = \"${{ env.NEXT_VERSION }}\"/" src/version.py
-          elif [ -f "src/release.ver" ]; then
-            echo "${{ env.NEXT_VERSION }}" > src/release.ver
+          COMPILER_DIR=$(find ./src -type d -name "dx_*" | head -n 1)
+          COMPILER_DIR_CLR=${COMPILER_DIR:6}
+          COMPILER_VERSION_PATH=src/${COMPILER_DIR:6}/version.py
+          if [ -f "$COMPILER_VERSION_PATH" ]; then
+            REPO_NAME=${{ env.GITHUB_REPOSITORY }}
+            sed -i "s/__version__ = .*/__version__ = \"${{ env.NEXT_VERSION }}\"/" $COMPILER_VERSION_PATH
+          elif [ -f "release.ver" ]; then
+            echo "${{ env.NEXT_VERSION }}" > release.ver
           fi
           git add .
 
