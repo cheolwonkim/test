@@ -19,12 +19,11 @@ jobs:
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: dry run
-        run: cz bump --dry-run
       - id: cz
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          dry_run: true
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
