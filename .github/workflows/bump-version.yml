@@ -38,7 +38,6 @@ jobs:
           COMPILER_DIR_CLR=${COMPILER_DIR:6}
           COMPILER_VERSION_PATH=src/${COMPILER_DIR:6}/version.py
           if [ -f "$COMPILER_VERSION_PATH" ]; then
-            REPO_NAME=${{ env.GITHUB_REPOSITORY }}
             sed -i "s/__version__ = .*/__version__ = \"${{ env.NEXT_VERSION }}\"/" $COMPILER_VERSION_PATH
           elif [ -f "release.ver" ]; then
             echo "${{ env.NEXT_VERSION }}" > release.ver
@@ -47,8 +46,12 @@ jobs:
 
       - name: Bump version
         run: |
-          git config --local user.email "cwkim@deepx.ai"
-          git config --local user.name "cwkimDO"
+          if [ -z "${{ secrets.USER_EMAIL }}" ] || [ -z "${{ secrets.USER_NAME }}" ]; then
+            echo "Error: User email and name must be set in secrets!"
+            exit 1
+          fi
+          git config --local user.email "${{ secrets.USER_EMAIL }}"
+          git config --local user.name "${{ secrets.USER_NAME }}"
           cz bump --yes
           git push
           git push --tag
