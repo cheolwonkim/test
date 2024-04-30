@@ -10,20 +10,25 @@ permissions:
 
 jobs:
   bump_version:
-    if: "!startsWith(${{ github.event.head_commit.message }}, 'Bump version:')"
     runs-on: ubuntu-latest
-    name: "Bump version and create changelog"
     steps:
       - name: Check out
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
-      - id: cz
-        name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@master
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          dry_run: true
+          python-version: '3.10'
+
+      - name: Install Commitizen
+        run: pip install commitizen
+
+      - name: Calculate next version
+        id: next_version
+        run: echo "::set-output name=version::$(cz bump --dry-run | grep 'bump:' | sed -E 's/.*→ (.*)/\1/')"
+
       - name: Print Version
-        run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
+        run: echo "Bumped to version ${{ steps.next_version.outputs.version }}"
