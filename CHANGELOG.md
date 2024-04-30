@@ -1,3 +1,10 @@
+## v0.2.6 (2024-04-30)
+
+
+- Fix/bump test
+- Fix/bump test
+- fix: test 4
+
 ## v0.2.5 (2024-04-30)
 
 
