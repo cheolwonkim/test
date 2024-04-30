@@ -1,3 +1,17 @@
+## v0.2.0 (2024-04-30)
+
+
+- fix: git config 2
+- fix: git config
+- feat: bump version
+- fix: next version
+- fix: dry dry 2
+- fix: dry drty
+- fix: next versio test
+- fix: next version check
+- fix: dry run test 3
+- fix: dry run test
+
 ## v0.1.1 (2024-04-30)
 
 
