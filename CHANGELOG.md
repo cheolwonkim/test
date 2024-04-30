@@ -1,3 +1,9 @@
+## v0.2.1 (2024-04-30)
+
+
+- Merge remote-tracking branch 'origin/main'
+- fix: version file change test
+
 ## v0.2.0 (2024-04-30)
 
 
