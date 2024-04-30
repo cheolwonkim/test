@@ -7,7 +7,6 @@ on:
 jobs:
   check-message:
     runs-on: ubuntu-latest
-    environment: action
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
