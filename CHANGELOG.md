@@ -1,3 +1,10 @@
+## v0.2.3 (2024-04-30)
+
+
+- Merge pull request #11 from cheolwonkim/fix/test
+- fix: version conflic test
+- fix: version conflic test
+
 ## v0.2.2 (2024-04-30)
 
 
