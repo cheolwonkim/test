@@ -44,8 +44,11 @@ jobs:
       - name: Bump version
         run: |
           cz bump --yes
+          git config --local user.email "cwkim@deepx.ai"
+          git config --local user.name "cwkimDO"
           git push
           git push --tag
+
 
 
       - name: Print Version
