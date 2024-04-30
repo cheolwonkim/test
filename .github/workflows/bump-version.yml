@@ -27,8 +27,8 @@ jobs:
         run: pip install commitizen
 
       - name: Calculate next version
-        id: next_version
-        run: echo "::set-output name=version::$(cz bump --dry-run | grep 'bump:' | sed -E 's/.*→ (.*)/\1/')"
+        run: |
+          echo "NEXT_VERSION=$(cz bump --dry-run | grep 'bump:' | sed -E 's/.*→ (.*)/\1/')" >> $GITHUB_ENV
 
       - name: Print Version
-        run: echo "Bumped to version ${{ steps.next_version.outputs.version }}"
+        run: echo "Bumped to version ${{ env.NEXT_VERSION }}"
