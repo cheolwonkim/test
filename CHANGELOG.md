@@ -1,3 +1,9 @@
+## v0.2.4 (2024-04-30)
+
+
+- fix: version conflic test 2 (#12)
+- Co-authored-by: CHEOLWON\cwkim <cwkim@deepx.ai>
+
 ## v0.2.3 (2024-04-30)
 
 
