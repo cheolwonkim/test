@@ -15,13 +15,12 @@ jobs:
         id: set-environment
         run: |
           if [ -f "release.ver" ]; then
-            COMPILER_VERSION_PATH = "release.ver"
+            COMPILER_VERSION_PATH="release.ver"
           else
             COMPILER_DIR=$(find ./src -type d -name "dx_*" | head -n 1)
             COMPILER_DIR_CLR=${COMPILER_DIR:6}
             COMPILER_VERSION_PATH=src/${COMPILER_DIR_CLR}/version.py
           fi
-          echo "version_file_path: $COMPILER_VERSION_PATH"
           echo "version_file_path=$COMPILER_VERSION_PATH" >> $GITHUB_OUTPUT
     outputs:
       version_file_path: ${{ steps.set-environment.outputs.version_file_path }}
@@ -46,9 +45,8 @@ jobs:
         run: |
           version_file=${{ needs.set-environment.outputs.version_file_path }}
           current_version=$(sed -nE 's/^__version__ = "(.*)"/\1/p' "$version_file")
-          new_version=$(bump2version --dry-run --list | grep current_version | sed 's/^.*=//').dev$(date +%s)
+          new_version=${current_version}.dev$(date +%s)
 
-          echo "current: $current_version newe: $new_version"
           echo "current_version=$current_version" >> $GITHUB_OUTPUT
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
 
@@ -64,7 +62,7 @@ jobs:
         run: |
           git config --local user.email $USER_EMAIL
           git config --local user.name $USER_NAME
-          git add  ${{ steps.version_info.outputs.version_file_path }} CHANGELOG.md
+          git add ${{ needs.set-environment.outputs.version_file_path }} CHANGELOG.md
           git commit -m "Bump version: ${{ steps.version_info.outputs.current_version }} to ${{ steps.version_info.outputs.new_version }}"
           git push origin dev
         env:
@@ -85,7 +83,7 @@ jobs:
         run: pip install bump2version
       - name: Update version
         run: |
-          bump2version patch --allow-dirty --commit --tag ${{ needs.set-environment.outputs.version_file_path }}
+          bump2version patch --allow-dirty
       - name: Tag version
         run: |
           git push --follow-tags
