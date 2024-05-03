@@ -6,6 +6,10 @@ on:
       - dev
       - main
 
+env:
+  USER_EMAIL: cwkim@deepx.ai
+  USER_NAME: cwkimDO
+
 jobs:
   set-environment:
     runs-on: ubuntu-latest
@@ -65,25 +69,28 @@ jobs:
           git add ${{ needs.set-environment.outputs.version_file_path }} CHANGELOG.md
           git commit -m "Bump version: ${{ steps.version_info.outputs.current_version }} to ${{ steps.version_info.outputs.new_version }}"
           git push origin dev
-        env:
-          USER_EMAIL: cwkim@deepx.ai
-          USER_NAME: cwkimDO
 
   bump-main-version:
     needs: set-environment
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.10'
+
       - name: Install version management tool
         run: pip install bump2version
+
       - name: Update version
         run: |
+          git config --local user.email $USER_EMAIL
+          git config --local user.name $USER_NAME
           bump2version patch --allow-dirty
+
       - name: Tag version
         run: |
           git push --follow-tags
