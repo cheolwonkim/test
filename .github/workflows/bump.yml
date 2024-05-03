@@ -80,13 +80,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.10'
       - name: Install version management tool
         run: pip install bump2version
       - name: Update version
         run: |
-          bump2version patch --allow-dirty ${{ needs.set-environment.outputs.version_file_path }}
+          bump2version patch --allow-dirty --commit --tag ${{ needs.set-environment.outputs.version_file_path }}
       - name: Tag version
         run: |
-          git tag v$(python ${{ needs.set-environment.outputs.version_file_path }} --version)
-          git push --tags
+          git push --follow-tags
