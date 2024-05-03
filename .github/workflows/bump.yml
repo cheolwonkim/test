@@ -59,6 +59,8 @@ jobs:
 
       - name: Update version
         run: |
+          git config --local user.email $USER_EMAIL
+          git config --local user.name $USER_NAME
           bump2version --new-version ${{ steps.version_info.outputs.new_version }} ${{ needs.set-environment.outputs.version_file_path }}
 
       - name: Generate changelog
