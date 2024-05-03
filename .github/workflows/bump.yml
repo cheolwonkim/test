@@ -10,6 +10,9 @@ env:
   USER_EMAIL: cwkim@deepx.ai
   USER_NAME: cwkimDO
 
+permissions:
+  contents: write
+
 jobs:
   set-environment:
     runs-on: ubuntu-latest
