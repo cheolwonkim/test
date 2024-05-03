@@ -1,0 +1,46 @@
+name: PR Title and Commit Message Checker
+
+on:
+  pull_request:
+    # synchronize: pr head branch was updated
+    # edited: pr title or body was editied, or base branch of pr was changed.
+    types: [opened, reopened, synchronize, edited]
+jobs:
+  check-message:
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
+      RELEASE_PATTERN: '^(Release)[^]+$'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: PR title check
+        run: |
+          echo "Checking PR Title: $PR_TITLE"
+          echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
+
+          if echo "$PR_TITLE" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
+            echo "matches commit message format."
+          elif echo "$PR_TITLE" | grep -Pq "$RELEASE_PATTERN"; then
+            echo "matches release format."
+          else
+            echo "does not match any required format."
+            exit 1
+          fi
+      - name: Commit message check
+        run: |
+          echo "Fetching PR commits..."
+          PR_COMMITS_URL=${{ github.event.pull_request.commits_url }}
+          echo "Commits URL: $PR_COMMITS_URL"
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $PR_COMMITS_URL > commits.json
+          jq -r '.[].commit.message' commits.json | while read commit_message; do
+            echo "Checking commit message: $commit_message"
+            if ! echo "$commit_message" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
+              echo "Commit message does not match the required format."
+              echo "$commit_message"
+              exit 1
+            fi
+          done
+          echo "All commit messages match the required format."
