@@ -65,7 +65,7 @@ jobs:
 
       - name: Generate changelog
         run: |
-          git-changelog --template changelog.md.j2 > CHANGELOG.md
+          git-changelog --template CHANGELOG.md > CHANGELOG.md
 
       - name: Commit changes
         run: |
