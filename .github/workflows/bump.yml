@@ -75,13 +75,10 @@ jobs:
           if [ -z "$LAST_COMMIT_HASH" ]; then
             echo "No Bump version commit found"
           else
-            LAST_COMMIT_MSG=$(git log -1 --format=%s $LAST_COMMIT_HASH)
-            CURRENT_VERSION=$(echo $LAST_COMMIT_MSG | grep -oP 'Bump version: \K[^\s]+')
-            if [ -z "$CURRENT_VERSION" ]; then
-              echo "Current version not found in the commit message"
+            TAG_NAME="v$CURRENT_VERSION"
+            if git tag -l | grep -qx "$TAG_NAME"; then
+              echo "Tag $TAG_NAME already exists"
             else
-              echo "CURRENT_VERSION_FOUND=true"
-              TAG_NAME="v$CURRENT_VERSION"
               git tag $TAG_NAME $LAST_COMMIT_HASH -m "Tagging version $TAG_NAME"
             fi
           fi

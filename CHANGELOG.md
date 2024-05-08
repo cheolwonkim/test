@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.28] - 2024-05-08
+## [0.3.30] - 2024-05-08
+
+### Bug Fixes
+
+- Change oldest version tagging
+
+## [0.3.29] - 2024-05-08
 
 ### Features
 
@@ -32,10 +38,6 @@ All notable changes to this project will be documented in this file.
 - *(action/changelog)* Change changelog method
 - *(action/changelog)* Git config
 - *(action/changelog)* Modify git tag option
-
-### Refactor
-
-- Delete file
 
 ## [0.3.17] - 2024-05-08
 
