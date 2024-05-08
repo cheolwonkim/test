@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.27] - 2024-05-08
+## [0.3.28] - 2024-05-08
 
 ### Features
 
@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - *(ci)* Test
 - Write new version
 - Add local tag
+- Add local tag 2
 
 ## [0.3.17] - 2024-05-08
 
