@@ -92,9 +92,10 @@ jobs:
         run: |
           echo "${{ steps.changelog.outputs.changelog }}" > temp_changelog.md
           awk 'NR==FNR{a[$0]++; next} !a[$0]' CHANGELOG.md temp_changelog.md > new_entries.md
-          echo "## Version $NEW_VERSION" > CHANGELOG.md
-          cat new_entries.md >> CHANGELOG.md
-          echo "" >> CHANGELOG.md
+          echo "## Version $NEW_VERSION" > CHANGELOG.md.new
+          echo "" >> CHANGELOG.md.new
+          cat new_entries.md >> CHANGELOG.md.new
+          echo "" >> CHANGELOG.md.new
           cat CHANGELOG.md >> CHANGELOG.md.new
           mv CHANGELOG.md.new CHANGELOG.md
 
