@@ -76,9 +76,9 @@ jobs:
       - name: Print the changelog
         run: cat "${{ steps.git-cliff.outputs.changelog }}"
 
-
       - name: Commit changes
         run: |
+          sed -i "s/\[unreleased\]/$NEW_VERSION/" CHANGELOG.md
           git config --local user.email $USER_EMAIL
           git config --local user.name $USER_NAME
           git add .
