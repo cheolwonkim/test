@@ -45,15 +45,9 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
       - name: Install tools
         run: |
           pip install bump2version gitchangelog pystache
-          npm install -g auto-changelog
 
       - name: Get version
         run: |
@@ -66,8 +60,31 @@ jobs:
           NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Generate Changelog
-        run: auto-changelog --output CHANGELOG.md --template keepachangelog --unreleased
+      - name: Changelog
+        uses: ardalanamini/auto-changelog@v4
+        with:
+          commit-types: |
+            feat: New Features
+            fix: Bug Fixes
+            build: Build System & Dependencies
+            perf: Performance Improvements
+            docs: Documentation
+            test: Tests
+            refactor: Refactors
+            chore: Chores
+            ci: CI
+            style: Code Style
+            revert: Reverts
+          default-commit-type: Other Changes
+          release-name: $NEW_VERSION
+          release-name-prefix: ""
+          mention-authors: true
+          mention-new-contributors: true
+          include-compare-link: false
+          include-pr-links: true
+          include-commit-links: true
+          semver: false
+          use-github-autolink: false
 
       - name: Commit changes
         run: |
