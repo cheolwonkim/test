@@ -2,17 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.32] - 2024-05-08
-
-### Features
-
-- *(README.md)* Test 2
+## [0.3.33] - 2024-05-08
 
 ### Bug Fixes
 
-- *(README.md)* Test 1
+- *(README.md)* Test 3
+- *(README.md)* Test 4
 
-## [0.3.31] - 2024-05-08
+## [0.3.32] - 2024-05-08
 
 ### Features
 
@@ -21,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - *(README.md)* Test test test vtest test test test test
 - Generate change log
 - Changelog generator test git-cliff
+- *(README.md)* Test 2
 
 ### Bug Fixes
 
@@ -43,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - *(action/changelog)* Git config
 - *(action/changelog)* Modify git tag option
 - Change oldest version tagging
+- *(README.md)* Test 1
 
 ### Refactor
 
