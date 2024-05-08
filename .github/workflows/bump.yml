@@ -82,7 +82,7 @@ jobs:
             else
               echo "CURRENT_VERSION_FOUND=true"
               TAG_NAME="v$CURRENT_VERSION"
-              git tag -a $TAG_NAME $LAST_COMMIT_HASH
+              git tag $TAG_NAME $LAST_COMMIT_HASH -m "Tagging version $TAG_NAME"
             fi
           fi
 
