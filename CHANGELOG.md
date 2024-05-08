@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.3.26
+## [0.3.27] - 2024-05-08
 
 ### Features
 
@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - *(github/action)* Config changelog generator
 - *(ci)* Test
 - Write new version
+- Add local tag
 
 ## [0.3.17] - 2024-05-08
 
