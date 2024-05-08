@@ -47,7 +47,7 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install bump2version gitchangelog pystache
+          pip install bump2version
 
       - name: Get version
         run: |
@@ -62,6 +62,7 @@ jobs:
 
       - name: Changelog
         uses: ardalanamini/auto-changelog@v4
+        id: changelog
         with:
           commit-types: |
             feat: New Features
@@ -86,6 +87,9 @@ jobs:
           semver: false
           use-github-autolink: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Save Changelog
+        run: echo "${{ steps.changelog.outputs.changelog }}" > CHANGELOG.md
 
 
       - name: Commit changes
