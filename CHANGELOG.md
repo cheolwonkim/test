@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.28] - 2024-05-08
+## [0.3.29] - 2024-05-08
+
+### Bug Fixes
+
+- *(action/changelog)* Change changelog method
+- *(action/changelog)* Git config
+- *(action/changelog)* Modify git tag option
+
+## [0.3.27] - 2024-05-08
 
 ### Features
 
@@ -71,6 +79,10 @@ All notable changes to this project will be documented in this file.
 - Test 3
 
 ## [0.3.4] - 2024-05-07
+
+### Bug Fixes
+
+- Test
 
 ### Miscellaneous Tasks
 
