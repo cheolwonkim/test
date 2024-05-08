@@ -81,10 +81,11 @@ jobs:
           mention-authors: true
           mention-new-contributors: true
           include-compare-link: false
-          include-pr-links: true
-          include-commit-links: true
+          include-pr-links: false
+          include-commit-links: false
           semver: false
           use-github-autolink: false
+
 
       - name: Commit changes
         run: |
