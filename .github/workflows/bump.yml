@@ -68,6 +68,22 @@ jobs:
           git tag v$NEW_VERSION
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
+      - name: Tag each Bump version commit
+        run: |
+          git log --format="%H %s" | grep -P 'Bump version: \S+ to \S+' | while read line; do
+            COMMIT_HASH=$(echo $line | cut -d ' ' -f1)
+            NEW_VERSION_TMP=$(echo $line | grep -oP 'to \K\S+')
+            TAG_NAME="v$NEW_VERSION_TMP"
+
+            if git tag -l | grep -qx "$TAG_NAME"; then
+              echo "Tag $TAG_NAME already exists. break..."
+              break
+            else
+              echo "Creating tag $TAG_NAME for commit $COMMIT_HASH"
+              git tag $TAG_NAME $COMMIT_HASH -m "Tagging version $TAG_NAME"
+            fi
+          done
+
       - name: Find and tag the last Bump version commit
         id: find_tag
         run: |
