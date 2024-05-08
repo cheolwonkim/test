@@ -59,6 +59,7 @@ jobs:
         run: |
           NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "::set-output name=new_version::$NEW_VERSION"
 
       - name: Changelog
         uses: ardalanamini/auto-changelog@v4
@@ -78,7 +79,7 @@ jobs:
             revert: Reverts
             Bump version: Bump version
           default-commit-type: Other Changes
-          release-name: ${{ steps.version_info.outputs.NEW_VERSION }}
+          release-name: ${{ steps.version_info.outputs.new_version }}
           release-name-prefix: ""
           mention-authors: true
           mention-new-contributors: true
