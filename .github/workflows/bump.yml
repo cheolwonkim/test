@@ -79,8 +79,8 @@ jobs:
             revert: Reverts
             Bump version: Bump version
           default-commit-type: Other Changes
-          release-name: ${{ steps.version_info.outputs.new_version }}
-          release-name-prefix: ""
+          release-name: release-name
+          release-name-prefix: "prefix"
           mention-authors: true
           mention-new-contributors: true
           include-compare-link: false
