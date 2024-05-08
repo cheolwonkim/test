@@ -47,7 +47,7 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install bump2version
+          pip install bump2version gitchangelog pystache
 
       - name: Get version
         run: |
@@ -60,9 +60,9 @@ jobs:
           NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      # - name: Generate changelog
-      #   run: |
-      #     git-changelog --template keepachangelog > CHANGELOG.md
+      - name: Generate Changelog
+        run: |
+          gitchangelog > CHANGELOG.md
 
       - name: Commit changes
         run: |
