@@ -60,7 +60,7 @@ jobs:
         id: version_info
         run: |
           NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
-          git tag $NEW_VERSION
+          git tag v$NEW_VERSION
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "::set-output name=new_version::$NEW_VERSION"
 
