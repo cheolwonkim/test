@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## 0.3.26
 
 ### Features
 
@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - *(github/action)* Change commit_changelog true to false
 - *(github/action)* Config changelog generator
 - *(ci)* Test
+- Write new version
 
 ## [0.3.17] - 2024-05-08
 
