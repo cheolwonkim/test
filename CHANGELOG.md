@@ -1,4 +1,6 @@
 ## CI
+* change log test 777 (by @cwkimDO)
+* change log test 666 (by @cwkimDO)
 * change log test 555 (by @cwkimDO)
 * change log test 444 (by @cwkimDO)
 * change log test 333 (& by @cwkimDO)
@@ -8,7 +10,8 @@
 * bump patch test 2 (by @cwkimDO)
 * bump patch test (by @cwkimDO)
 
-## Other Changes
+## Bump version
+* 0.3.12 to 0.3.13 (by @cwkimDO)
 * 0.3.11 to 0.3.12 (by @cwkimDO)
 * 0.3.10 to 0.3.11 (by @cwkimDO)
 * 0.3.9 to 0.3.10 (by @cwkimDO)
