@@ -1,5 +1,5 @@
 changelog_type: 'commit_message'
-header_prefix: 'Version:'
+header_prefix: 'Bump version:'
 commit_changelog: true
 comment_changelog: false
 include_unlabeled_changes: true

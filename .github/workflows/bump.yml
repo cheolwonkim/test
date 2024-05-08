@@ -61,18 +61,11 @@ jobs:
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "::set-output name=new_version::$NEW_VERSION"
 
-      - name: Create local tag on last Bump version commit
-        id: find_commit
-        run: |
-          LAST_COMMIT_HASH=$(git log --format="%H %s" | grep -m 1 'Bump version:' | cut -d' ' -f1)
-          echo "LAST_COMMIT_HASH=$LAST_COMMIT_HASH" >> $GITHUB_ENV
-          echo "::set-output name=commit_hash::$LAST_COMMIT_HASH"
-
       - name: Run Changelog CI
         uses: saadmk11/changelog-ci@v1.1.2
         with:
           config_file: .changelog-config.yml
-          release_version: $NEW_VERSION
+          release_version: ${{ steps.version_info.outputs.NEW_VERSION }}
 
       - name: Commit changes
         run: |
