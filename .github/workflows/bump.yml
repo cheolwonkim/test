@@ -62,8 +62,24 @@ jobs:
           NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
           git tag v$NEW_VERSION
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-          echo "::set-output name=new_version::$NEW_VERSION"
 
+      - name: Find and tag the last Bump version commit
+        id: find_tag
+        run: |
+          LAST_COMMIT_HASH=$(git log --format="%H %s" | grep -m 1 'Bump version:' | cut -d ' ' -f1)
+          if [ -z "$LAST_COMMIT_HASH" ]; then
+            echo "No Bump version commit found"
+          else
+            LAST_COMMIT_MSG=$(git log -1 --format=%s $LAST_COMMIT_HASH)
+            CURRENT_VERSION=$(echo $LAST_COMMIT_MSG | grep -oP 'Bump version: \K[^\s]+')
+            if [ -z "$CURRENT_VERSION" ]; then
+              echo "Current version not found in the commit message"
+            else
+              echo "CURRENT_VERSION_FOUND=true"
+              TAG_NAME="v$CURRENT_VERSION"
+              git tag -a $TAG_NAME $LAST_COMMIT_HASH
+            fi
+          fi
 
       - name: Generate CHANGELOG.md
         uses: orhun/git-cliff-action@v3.0.2
