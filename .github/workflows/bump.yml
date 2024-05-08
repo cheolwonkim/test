@@ -14,89 +14,118 @@ permissions:
   contents: write
 
 jobs:
-  set-environment:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Get Version Info
-        id: set-environment
-        run: |
-          if [ -f "release.ver" ]; then
-            COMPILER_VERSION_PATH="release.ver"
-          else
-            COMPILER_DIR=$(find ./src -type d -name "dx_*" | head -n 1)
-            COMPILER_DIR_CLR=${COMPILER_DIR:6}
-            COMPILER_VERSION_PATH=src/${COMPILER_DIR_CLR}/version.py
-          fi
-          echo "version_file_path=$COMPILER_VERSION_PATH" >> $GITHUB_OUTPUT
-    outputs:
-      version_file_path: ${{ steps.set-environment.outputs.version_file_path }}
+  # set-environment:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+
+  #     - name: Get version file path
+  #       id: set-environment
+  #       run: |
+  #         if [ -f "release.ver" ]; then
+  #           COMPILER_VERSION_PATH="release.ver"
+  #         else
+  #           COMPILER_DIR=$(find ./src -type d -name "dx_*" | head -n 1)
+  #           COMPILER_DIR_CLR=${COMPILER_DIR:6}
+  #           COMPILER_VERSION_PATH=src/${COMPILER_DIR_CLR}/version.py
+  #         fi
+  #         echo "version_file_path=$COMPILER_VERSION_PATH" >> $GITHUB_OUTPUT
+  #   outputs:
+  #     version_file_path: ${{ steps.set-environment.outputs.version_file_path }}
 
   bump-dev-version:
-    needs: set-environment
+    # needs: set-environment
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    # if: github.ref == 'refs/heads/dev'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install tools
         run: |
-          pip install bump2version git-changelog
+          pip install bump2version
 
-      - name: Determine version
+      - name: Set git config
+        run: |
+          git config --global user.email $USER_EMAIL
+          git config --global user.name $USER_NAME
+
+      - name: Get version
+        run: |
+          VERSION=$(grep 'current_version =' .bumpversion.cfg | cut -d ' ' -f 3)
+          echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Bump version
         id: version_info
         run: |
-          version_file=${{ needs.set-environment.outputs.version_file_path }}
-          current_version=$(sed -nE 's/^__version__ = "(.*)"/\1/p' "$version_file")
-          new_version=${current_version}.dev$(date +%s)
+          NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+          git tag v$NEW_VERSION
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-          echo "current_version=$current_version" >> $GITHUB_OUTPUT
-          echo "new_version=$new_version" >> $GITHUB_OUTPUT
-
-      - name: Update version
+      - name: Find and tag the last Bump version commit
+        id: find_tag
         run: |
-          git config --local user.email $USER_EMAIL
-          git config --local user.name $USER_NAME
-          bump2version --new-version ${{ steps.version_info.outputs.new_version }} ${{ needs.set-environment.outputs.version_file_path }}
+          LAST_COMMIT_HASH=$(git log --format="%H %s" | grep -m 1 'Bump version:' | cut -d ' ' -f1)
+          if [ -z "$LAST_COMMIT_HASH" ]; then
+            echo "No Bump version commit found"
+          else
+            LAST_COMMIT_MSG=$(git log -1 --format=%s $LAST_COMMIT_HASH)
+            CURRENT_VERSION=$(echo $LAST_COMMIT_MSG | grep -oP 'Bump version: \K[^\s]+')
+            if [ -z "$CURRENT_VERSION" ]; then
+              echo "Current version not found in the commit message"
+            else
+              echo "CURRENT_VERSION_FOUND=true"
+              TAG_NAME="v$CURRENT_VERSION"
+              git tag $TAG_NAME $LAST_COMMIT_HASH -m "Tagging version $TAG_NAME"
+            fi
+          fi
 
-      - name: Generate changelog
-        run: |
-          git-changelog --template keepachangelog > CHANGELOG.md
+      - name: Generate CHANGELOG.md
+        uses: orhun/git-cliff-action@v3.0.2
+        id: git-cliff
+        with:
+          config: '.cliff.toml'
+          args: --verbose
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Print the changelog
+        run: cat "${{ steps.git-cliff.outputs.changelog }}"
 
       - name: Commit changes
         run: |
-          git config --local user.email $USER_EMAIL
-          git config --local user.name $USER_NAME
-          git add ${{ needs.set-environment.outputs.version_file_path }} CHANGELOG.md
-          git commit -m "Bump version: ${{ steps.version_info.outputs.current_version }} to ${{ steps.version_info.outputs.new_version }}"
-          git push origin dev
+          git add .
+          git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
+          git push
 
-  bump-main-version:
-    needs: set-environment
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+  # bump-main-version:
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
 
-      - name: Install version management tool
-        run: pip install bump2version
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.10'
 
-      - name: Update version
-        run: |
-          git config --local user.email $USER_EMAIL
-          git config --local user.name $USER_NAME
-          bump2version patch --allow-dirty
+  #     - name: Install version management tool
+  #       run: pip install bump2version
 
-      - name: Tag version
-        run: |
-          git push --follow-tags
-          git remote set-url origin https://actions:${{ secrets.GITHUB_TOKEN }}@github.com/cheolwonkim/test.git
+  #     - name: Update version
+  #       run: |
+  #         git config --local user.email $USER_EMAIL
+  #         git config --local user.name $USER_NAME
+  #         bump2version patch --allow-dirty
+
+  #     - name: Tag version
+  #       run: |
+  #         git push --follow-tags
+  #         git remote set-url origin https://actions:${{ secrets.GITHUB_TOKEN }}@github.com/cheolwonkim/test.git

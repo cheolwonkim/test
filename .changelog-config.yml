@@ -1,0 +1,32 @@
+changelog_type: 'commit_message'
+header_prefix: 'Bump version:'
+commit_changelog: true
+comment_changelog: false
+include_unlabeled_changes: true
+unlabeled_group_title: 'Other Changes'
+version_regex: 'v?([0-9]{1,2})+[.]+([0-9]{1,2})+[.]+([0-9]{1,2})\s\(\d{1,2}-\d{1,2}-\d{4}\)'
+group_config:
+  - title: Fixes
+    labels:
+      - fix
+  - title: Features
+    labels:
+      - feat
+  - title: Documents
+    labels:
+      - docs
+  - title: Refactors
+    labels:
+      - refactor
+  - title: Tests
+    labels:
+      - test
+  - title: CI
+    labels:
+      - ci
+  - title: Styles
+    labels:
+      - style
+  - title: Bump Versions
+    labels:
+      - Bump version
