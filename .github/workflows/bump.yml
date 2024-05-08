@@ -85,6 +85,7 @@ jobs:
           include-commit-links: false
           semver: false
           use-github-autolink: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Commit changes
