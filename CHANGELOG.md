@@ -1,3 +1,6 @@
+## Tests
+* test release name (by @cwkimDO)
+
 ## CI
 * change log test 777 (by @cwkimDO)
 * change log test 666 (by @cwkimDO)
@@ -11,6 +14,7 @@
 * bump patch test (by @cwkimDO)
 
 ## Bump version
+* 0.3.13 to 0.3.14 (by @cwkimDO)
 * 0.3.12 to 0.3.13 (by @cwkimDO)
 * 0.3.11 to 0.3.12 (by @cwkimDO)
 * 0.3.10 to 0.3.11 (by @cwkimDO)
