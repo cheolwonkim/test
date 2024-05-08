@@ -90,22 +90,13 @@ jobs:
 
       - name: Prepend Changelog
         run: |
-          echo "## $NEW_VERSION" > temp_changelog.md
-          echo "${{ steps.changelog.outputs.changelog }}" >> temp_changelog.md
-          echo "" >> temp_changelog.md
-          cat CHANGELOG.md >> temp_changelog.md
-          mv temp_changelog.md CHANGELOG.md
-
-      - name: Prepend Changelog
-        run: |
           echo "${{ steps.changelog.outputs.changelog }}" > temp_changelog.md
           awk 'NR==FNR{a[$0]++; next} !a[$0]' CHANGELOG.md temp_changelog.md > new_entries.md
           echo "## Version $NEW_VERSION" > CHANGELOG.md
           cat new_entries.md >> CHANGELOG.md
           echo "" >> CHANGELOG.md
-          cat CHANGELOG.md.old >> CHANGELOG.md
-          rm new_entries.md temp_changelog.md
-
+          cat CHANGELOG.md >> CHANGELOG.md.new
+          mv CHANGELOG.md.new CHANGELOG.md
 
       - name: Commit changes
         run: |
