@@ -39,6 +39,8 @@ jobs:
     # if: github.ref == 'refs/heads/dev'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -61,11 +63,19 @@ jobs:
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "::set-output name=new_version::$NEW_VERSION"
 
-      - name: Run Changelog CI
-        uses: saadmk11/changelog-ci@v1.1.2
+
+      - name: Generate CHANGELOG.md
+        uses: orhun/git-cliff-action@v3.0.2
+        id: git-cliff
         with:
-          config_file: .changelog-config.yml
-          release_version: ${{ steps.version_info.outputs.NEW_VERSION }}
+          config: '.cliff.toml'
+          args: --verbose
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Print the changelog
+        run: cat "${{ steps.git-cliff.outputs.changelog }}"
+
 
       - name: Commit changes
         run: |
