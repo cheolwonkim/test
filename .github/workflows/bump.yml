@@ -60,6 +60,7 @@ jobs:
         id: version_info
         run: |
           NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+          git tag $NEW_VERSION
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "::set-output name=new_version::$NEW_VERSION"
 
@@ -78,7 +79,6 @@ jobs:
 
       - name: Commit changes
         run: |
-          sed -i "s/\[unreleased\]/$NEW_VERSION/" CHANGELOG.md
           git config --local user.email $USER_EMAIL
           git config --local user.name $USER_NAME
           git add .
