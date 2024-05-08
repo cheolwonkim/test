@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.30] - 2024-05-08
+## [0.3.32] - 2024-05-08
+
+### Features
+
+- *(README.md)* Test 2
+
+### Bug Fixes
+
+- *(README.md)* Test 1
+
+## [0.3.31] - 2024-05-08
 
 ### Features
 
