@@ -76,13 +76,14 @@ jobs:
             ci: CI
             style: Code Style
             revert: Reverts
+            Bump version: Bump version
           default-commit-type: Other Changes
-          release-name: $NEW_VERSION
+          release-name: ${{ steps.version_info.outputs.NEW_VERSION }}
           release-name-prefix: ""
           mention-authors: true
           mention-new-contributors: true
           include-compare-link: false
-          include-pr-links: false
+          include-pr-links: true
           include-commit-links: false
           semver: false
           use-github-autolink: false
