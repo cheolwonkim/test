@@ -2,16 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.41] - 2024-05-09
+
+### Fixes
+
+- Delete changelog
+
+## [0.3.39] - 2024-05-09
+
+### Fixes
+
+- Test
+- Test 23
+
+## [0.3.38] - 2024-05-09
+
+### Miscellaneous Tasks
+
+- Tag tag tag
+
+## [0.3.37] - 2024-05-09
+
+### Miscellaneous Tasks
+
+- Tag test
+
+## [0.3.35] - 2024-05-09
+
+### Fixes
+
+- Tag name fixed
+
 ## [0.3.34] - 2024-05-08
 
-### Bug Fixes
+### Fixes
 
 - All tagging
-- Test 10101010
 
 ## [0.3.33] - 2024-05-08
 
-### Bug Fixes
+### Fixes
 
 - *(README.md)* Test 3
 - *(README.md)* Test 4
@@ -22,7 +52,11 @@ All notable changes to this project will be documented in this file.
 
 - *(README.md)* Test 2
 
+<<<<<<< HEAD
 ### Bug Fixes
+=======
+### Fixes
+>>>>>>> main
 
 - *(README.md)* Test 1
 
@@ -36,7 +70,7 @@ All notable changes to this project will be documented in this file.
 - Generate change log
 - Changelog generator test git-cliff
 
-### Bug Fixes
+### Fixes
 
 - Test 333
 - Test 4444
@@ -68,7 +102,7 @@ All notable changes to this project will be documented in this file.
 
 - *(README.md)* Test dasdasda
 
-### Bug Fixes
+### Fixes
 
 - Test version docs in CHANGELOG
 
@@ -104,7 +138,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.3.4] - 2024-05-07
 
-### Bug Fixes
+### Fixes
 
 - Test
 
@@ -114,7 +148,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.3.3] - 2024-05-07
 
-### Bug Fixes
+### Fixes
 
 - Sync main to dev
 - Test
@@ -150,7 +184,7 @@ All notable changes to this project will be documented in this file.
 
 - Test 1
 
-### Bug Fixes
+### Fixes
 
 - Test 3
 
@@ -161,31 +195,31 @@ All notable changes to this project will be documented in this file.
 
 ## [0.2.6] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Test 4
 
 ## [0.2.5] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Test test
 
 ## [0.2.4] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Version conflic test 2 (#12)
 
 ## [0.2.3] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Version conflic test
 
 ## [0.2.2] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Test
 - Set env git config
@@ -196,7 +230,7 @@ All notable changes to this project will be documented in this file.
 
 - Bump version
 
-### Bug Fixes
+### Fixes
 
 - Dry run test
 - Dry run test 3
@@ -211,7 +245,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.1] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Test test
 - Add permission
@@ -223,7 +257,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.0] - 2024-04-30
 
-### Bug Fixes
+### Fixes
 
 - Test commit 2
 
