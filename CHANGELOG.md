@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.43] - 2024-05-09
+
+### Fixes
+
+- Test 5
+- Test 6
+- Test 7
+
 ## [0.3.41] - 2024-05-09
 
 ### Fixes
