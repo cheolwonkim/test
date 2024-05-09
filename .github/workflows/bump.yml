@@ -130,6 +130,7 @@ jobs:
       id: version_info
       run: |
         NEW_VERSION=$(bump2version ${{ steps.semver.outputs.bump }} --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
     - name: Commit changes
       run: |
