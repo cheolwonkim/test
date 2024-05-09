@@ -83,21 +83,35 @@ jobs:
           git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
           git push
 
-  # bump-main-version:
+  bump-main-version:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'skip bump')
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
 
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/main'
+    - name: Install tool
+      run: pip install bump2version
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: '3.10'
+    - name: Get Previous tag
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-  #     - name: Install version management tool
-  #       run: pip install bump2version
+    - name: Get next minor version
+      id: semvers
+      uses: "WyriHaximus/github-action-next-semvers@v1"
+      with:
+        version: ${{ steps.previoustag.outputs.tag }}
 
+    - name: nexversion print
+      run: |
+        echo "${{ steps.semvers.outputs.major }} ${{ steps.semvers.outputs.minor }} ${{ steps.semvers.outputs.patch }}"
+        echo "${{ steps.semvers.outputs.v_major }} ${{ steps.semvers.outputs.v_minor }} ${{ steps.semvers.outputs.v_patch }}"
   #     - name: Update version
   #       run: |
   #         git config --local user.email $USER_EMAIL
