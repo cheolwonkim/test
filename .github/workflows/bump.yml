@@ -117,6 +117,18 @@ jobs:
           git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
           git push
 
+      - name: Build change log
+        id: build_change_log
+        uses: mikepenz/release-changelog-builder-action@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          fromTag: ${{ env.NEW_VERSION }}
+          toTag: ${{ env.CURRENT_VERSION }}
+
+      - name: print changelog
+        run: |
+          echo "${{ steps.build_change_log.outputs.changelog }}"
+
   # bump-main-version:
 
   #   runs-on: ubuntu-latest

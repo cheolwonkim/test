@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_TITLE: ${{ github.event.pull_request.title }}
-      COMMIT_MESSAGE_PATTERN: '^(fix|feat|docs|style|refactor|break|test|build|ci|bump|Bump version)(\([^\)]+\))?: .+$'
+      COMMIT_MESSAGE_PATTERN: '^(fix|feat|perf|chore|docs|style|revert|refactor|break|test|build|ci|bump|Bump version|chore)(\([^\)]+\))?: .+$'
       RELEASE_PATTERN: '^(Release)[^]+$'
     steps:
       - name: Checkout code
