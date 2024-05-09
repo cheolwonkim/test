@@ -106,16 +106,26 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         prefix: v
 
-    - name: Get next minor version
-      id: semvers
-      uses: "WyriHaximus/github-action-next-semvers@v1"
+    - name: Get Next Version
+      id: semver
+      uses: ietf-tools/semver-action@v1
       with:
-        version: ${{ steps.previoustag.outputs.tag }}
-
-    - name: nexversion print
+        token: ${{ github.token }}
+        branch: main
+    - name: print
       run: |
-        echo "${{ steps.semvers.outputs.major }} ${{ steps.semvers.outputs.minor }} ${{ steps.semvers.outputs.patch }}"
-        echo "${{ steps.semvers.outputs.v_major }} ${{ steps.semvers.outputs.v_minor }} ${{ steps.semvers.outputs.v_patch }}"
+        echo "next: ${{ steps.semver.outputs.next }}"
+
+    # - name: Get next minor version
+    #   id: semvers
+    #   uses: "WyriHaximus/github-action-next-semvers@v1"
+    #   with:
+    #     version: ${{ steps.previoustag.outputs.tag }}
+
+    # - name: nexversion print
+    #   run: |
+    #     echo "${{ steps.semvers.outputs.major }} ${{ steps.semvers.outputs.minor }} ${{ steps.semvers.outputs.patch }}"
+    #     echo "${{ steps.semvers.outputs.v_major }} ${{ steps.semvers.outputs.v_minor }} ${{ steps.semvers.outputs.v_patch }}"
   #     - name: Update version
   #       run: |
   #         git config --local user.email $USER_EMAIL
