@@ -112,7 +112,7 @@ jobs:
       with:
         token: ${{ github.token }}
         branch: main
-        majorList: '!feat, break, BREAKING CHANGE'
+        majorList: break, BREAKING CHANGE
         minorList: feat
         patchList: fix, perf, refactor, test
     - name: print
