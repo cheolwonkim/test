@@ -118,6 +118,7 @@ jobs:
     - name: print
       run: |
         echo "next: ${{ steps.semver.outputs.next }}"
+        echo "what bump: ${{ steps.semver.outputs.bump }}"
 
     # - name: Get next minor version
     #   id: semvers
