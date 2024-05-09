@@ -1,4 +1,4 @@
-name: PR Title and Commit Message Checker
+name: Convention Checker
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ env:
     RELEASE_PATTERN: ${{ vars.RELEASE_PATTERN }}
 
 jobs:
-  PR-Title-Check:
+  PR-Title:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -30,9 +30,8 @@ jobs:
             exit 1
           fi
 
-  Commit-Message-Check:
+  Commit-Message:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
