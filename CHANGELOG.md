@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.41] - 2024-05-09
+
+### Fixes
+
+- Delete changelog
+
 ## [0.3.39] - 2024-05-09
 
 ### Fixes
