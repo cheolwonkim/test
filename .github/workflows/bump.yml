@@ -106,8 +106,8 @@ jobs:
         id: build_change_log
         uses: mikepenz/release-changelog-builder-action@v4
         with:
-          fromTag: v${{ env.NEW_VERSION }}
-          toTag: v${{ env.CURRENT_VERSION }}
+          fromTag: v${{ env.CURRENT_VERSION }}
+          toTag: v${{ env.NEW_VERSION }}
 
       - name: print changelog
         run: |
