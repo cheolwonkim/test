@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.45] - 2024-05-09
+
+### Miscellaneous Tasks
+
+- *(action/message-checker)* action & job name change
+
 ## [0.3.44] - 2024-05-09
 
 ### Miscellaneous Tasks
