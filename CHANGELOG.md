@@ -1,19 +1,4 @@
 # Changelog
-
-All notable changes to this project will be documented in this file.
-
-## [0.3.45] - 2024-05-09
-
-### Miscellaneous Tasks
-
-- *(action/message-checker)* action & job name change
-
-## [0.3.44] - 2024-05-09
-
-### Miscellaneous Tasks
-
-- modify github action
-
 ## [0.3.43] - 2024-05-09
 
 ### Fixes
@@ -21,6 +6,17 @@ All notable changes to this project will be documented in this file.
 - test 5
 - test 6
 - test 7
+
+## [0.3.34] - 2024-05-08
+
+### Fixes
+
+- test 10101010
+
+### Miscellaneous Tasks
+
+- modify github action
+- *(action/message-checker)* action & job name change
 
 ## [0.3.41] - 2024-05-09
 
@@ -48,12 +44,6 @@ All notable changes to this project will be documented in this file.
 - tag test
 
 ## [0.3.35] - 2024-05-09
-
-### Fixes
-
-- tag name fixed
-
-## [0.3.34] - 2024-05-08
 
 ### Features
 
@@ -89,7 +79,7 @@ All notable changes to this project will be documented in this file.
 - *(README.md)* test 3
 - *(README.md)* test 4
 - all tagging
-- test 10101010
+- tag name fixed
 
 ### Refactor
 
