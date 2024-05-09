@@ -88,6 +88,9 @@ jobs:
     if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'skip bump')
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -101,6 +104,7 @@ jobs:
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        prefix: v
 
     - name: Get next minor version
       id: semvers
