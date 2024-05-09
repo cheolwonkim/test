@@ -122,8 +122,8 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
-          fromTag: ${{ env.NEW_VERSION }}
-          toTag: ${{ env.CURRENT_VERSION }}
+          fromTag: v${{ env.NEW_VERSION }}
+          toTag: v${{ env.CURRENT_VERSION }}
 
       - name: print changelog
         run: |
