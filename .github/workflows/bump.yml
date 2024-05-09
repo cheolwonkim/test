@@ -114,7 +114,7 @@ jobs:
         branch: main
         majorList: break
         minorList: feat
-        patchList: fix, perf, refactor, test
+        patchList: fix, perf, refactor
 
     - name: Bump
       run: |
