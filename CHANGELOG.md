@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.39] - 2024-05-09
+
+### Fixes
+
+- Test
+
 ## [0.3.38] - 2024-05-09
 
 ### Miscellaneous Tasks
