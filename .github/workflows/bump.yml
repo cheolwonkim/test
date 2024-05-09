@@ -14,29 +14,10 @@ permissions:
   contents: write
 
 jobs:
-  # set-environment:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-
-  #     - name: Get version file path
-  #       id: set-environment
-  #       run: |
-  #         if [ -f "release.ver" ]; then
-  #           COMPILER_VERSION_PATH="release.ver"
-  #         else
-  #           COMPILER_DIR=$(find ./src -type d -name "dx_*" | head -n 1)
-  #           COMPILER_DIR_CLR=${COMPILER_DIR:6}
-  #           COMPILER_VERSION_PATH=src/${COMPILER_DIR_CLR}/version.py
-  #         fi
-  #         echo "version_file_path=$COMPILER_VERSION_PATH" >> $GITHUB_OUTPUT
-  #   outputs:
-  #     version_file_path: ${{ steps.set-environment.outputs.version_file_path }}
-
   bump-dev-version:
     # needs: set-environment
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip ci')
     steps:
       - uses: actions/checkout@v4
         with:
