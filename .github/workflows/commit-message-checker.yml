@@ -5,30 +5,38 @@ on:
     # synchronize: pr head branch was updated
     # edited: pr title or body was editied, or base branch of pr was changed.
     types: [opened, reopened, synchronize, edited]
+env:
+    PR_TITLE: ${{ github.event.pull_request.title }}
+    COMMIT_MESSAGE_PATTERN: ${{ vars.COMMIT_MESSAGE_PATTERN }}
+    RELEASE_PATTERN: ${{ vars.RELEASE_PATTERN }}
+
 jobs:
-  check-message:
+  PR-Title-Check:
     runs-on: ubuntu-latest
-    env:
-      PR_TITLE: ${{ github.event.pull_request.title }}
-      COMMIT_MESSAGE_PATTERN: '^(fix|feat|perf|chore|docs|style|revert|refactor|break|test|build|ci|bump|Bump version|chore)(\([^\)]+\))?: .+$'
-      RELEASE_PATTERN: '^(Release)[^]+$'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v4
       - name: PR title check
         run: |
-          echo "Checking PR Title: $PR_TITLE"
-          echo "COMMIT_MESSAGE_PATTERN: $COMMIT_MESSAGE_PATTERN"
+          echo "Checking PR Title: ${{ env.PR_TITLE }}"
+          echo "COMMIT_MESSAGE_PATTERN: ${{ env.COMMIT_MESSAGE_PATTERN }}"
 
-          if echo "$PR_TITLE" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
+          if echo "${{ env.PR_TITLE }}" | grep -Pq "${{ env.COMMIT_MESSAGE_PATTERN }}"; then
             echo "matches commit message format."
-          elif echo "$PR_TITLE" | grep -Pq "$RELEASE_PATTERN"; then
+          elif echo "${{ env.PR_TITLE }}" | grep -Pq "${{ env.RELEASE_PATTERN }}"; then
             echo "matches release format."
           else
             echo "does not match any required format."
             exit 1
           fi
+
+  Commit-Message-Check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Commit message check
         run: |
           echo "Fetching PR commits..."
@@ -37,7 +45,7 @@ jobs:
           curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $PR_COMMITS_URL > commits.json
           jq -r '.[].commit.message' commits.json | while read commit_message; do
             echo "Checking commit message: $commit_message"
-            if ! echo "$commit_message" | grep -Pq "$COMMIT_MESSAGE_PATTERN"; then
+            if ! echo "$commit_message" | grep -Pq "${{ env.COMMIT_MESSAGE_PATTERN }}"; then
               echo "Commit message does not match the required format."
               echo "$commit_message"
               exit 1
