@@ -133,24 +133,3 @@ jobs:
         git tag v$NEW_VERSION
         git push
         git push origin v$NEW_VERSION
-
-    # - name: Get next minor version
-    #   id: semvers
-    #   uses: "WyriHaximus/github-action-next-semvers@v1"
-    #   with:
-    #     version: ${{ steps.previoustag.outputs.tag }}
-
-    # - name: nexversion print
-    #   run: |
-    #     echo "${{ steps.semvers.outputs.major }} ${{ steps.semvers.outputs.minor }} ${{ steps.semvers.outputs.patch }}"
-    #     echo "${{ steps.semvers.outputs.v_major }} ${{ steps.semvers.outputs.v_minor }} ${{ steps.semvers.outputs.v_patch }}"
-  #     - name: Update version
-  #       run: |
-  #         git config --local user.email $USER_EMAIL
-  #         git config --local user.name $USER_NAME
-  #         bump2version patch --allow-dirty
-
-  #     - name: Tag version
-  #       run: |
-  #         git push --follow-tags
-  #         git remote set-url origin https://actions:${{ secrets.GITHUB_TOKEN }}@github.com/cheolwonkim/test.git
