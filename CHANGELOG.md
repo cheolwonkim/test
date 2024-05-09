@@ -2,274 +2,277 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.45] - 2024-05-09
+
+### Miscellaneous Tasks
+
+- *(action/message-checker)* action & job name change
+
+## [0.3.44] - 2024-05-09
+
+### Miscellaneous Tasks
+
+- modify github action
+
+## [0.3.43] - 2024-05-09
+
+### Fixes
+
+- test 5
+- test 6
+- test 7
+
 ## [0.3.41] - 2024-05-09
 
 ### Fixes
 
-- Delete changelog
+- delete changelog
 
 ## [0.3.39] - 2024-05-09
 
 ### Fixes
 
-- Test
-- Test 23
+- test
+- test 23
 
 ## [0.3.38] - 2024-05-09
 
 ### Miscellaneous Tasks
 
-- Tag tag tag
+- tag tag tag
 
 ## [0.3.37] - 2024-05-09
 
 ### Miscellaneous Tasks
 
-- Tag test
+- tag test
 
 ## [0.3.35] - 2024-05-09
 
 ### Fixes
 
-- Tag name fixed
+- tag name fixed
 
 ## [0.3.34] - 2024-05-08
 
-### Fixes
-
-- All tagging
-
-## [0.3.33] - 2024-05-08
-
-### Fixes
-
-- *(README.md)* Test 3
-- *(README.md)* Test 4
-
-## [0.3.32] - 2024-05-08
-
 ### Features
 
-- *(README.md)* Test 2
-
-### Fixes
-
-- *(README.md)* Test 1
-
-## [0.3.30] - 2024-05-08
-
-### Features
-
-- Function READ ME 1
-- Fkfkfkfkfkfkfkf
-- *(README.md)* Test test test vtest test test test test
-- Generate change log
+- function READ ME 1
+- fkfkfkfkfkfkfkf
+- *(README.md)* test test test vtest test test test test
+- generate change log
 - Changelog generator test git-cliff
+- *(README.md)* test 2
 
 ### Fixes
 
-- Test 333
-- Test 4444
-- *(github/action)* Change log
-- *(github/action)* Generate change log
-- *(CHANGELOG.md)* Reset change log
-- *(README.md)* Test 333333333333
-- Asdadasdasda
-- *(README.md)* Asdasdaa vcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-- *(github/action)* Add release_version param
-- *(github/action)* Change commit_changelog true to false
-- *(github/action)* Config changelog generator
-- *(ci)* Test
-- Write new version
-- Add local tag
-- Add local tag 2
-- *(action/changelog)* Change changelog method
-- *(action/changelog)* Git config
-- *(action/changelog)* Modify git tag option
-- Change oldest version tagging
+- test 333
+- test 4444
+- *(github/action)* change log
+- *(github/action)* generate change log
+- *(CHANGELOG.md)* reset change log
+- *(README.md)* test 333333333333
+- asdadasdasda
+- *(README.md)* asdasdaa vcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+- *(github/action)* add release_version param
+- *(github/action)* change commit_changelog true to false
+- *(github/action)* config changelog generator
+- *(ci)* test
+- write new version
+- add local tag
+- add local tag 2
+- *(action/changelog)* change changelog method
+- *(action/changelog)* git config
+- *(action/changelog)* modify git tag option
+- change oldest version tagging
+- *(README.md)* test 1
+- *(README.md)* test 3
+- *(README.md)* test 4
+- all tagging
+- test 10101010
 
 ### Refactor
 
-- Delete file
+- delete file
 
 ## [0.3.17] - 2024-05-08
 
 ### Features
 
-- *(README.md)* Test dasdasda
+- *(README.md)* test dasdasda
 
 ### Fixes
 
-- Test version docs in CHANGELOG
+- test version docs in CHANGELOG
 
 ### Testing
 
-- Test release name
+- test release name
 
 ### Miscellaneous Tasks
 
-- Bump patch test
-- Bump patch test 2
-- Bump patch test 3
-- Dev version automation and generate changelog
-- Dev version automation and generate changelog 2
-- Change log test 333
-- Change log test 333
-- Change log test 444
-- Change log test 555
-- Change log test 666
-- Change log test 777
+- bump patch test
+- bump patch test 2
+- bump patch test 3
+- dev version automation and generate changelog
+- dev version automation and generate changelog 2
+- change log test 333
+- change log test 333
+- change log test 444
+- change log test 555
+- change log test 666
+- change log test 777
 
 ## [0.3.6] - 2024-05-07
 
 ### Miscellaneous Tasks
 
-- Ttttttt
+- ttttttt
 
 ## [0.3.5] - 2024-05-07
 
 ### Miscellaneous Tasks
 
-- Test 3
+- test 3
 
 ## [0.3.4] - 2024-05-07
 
 ### Fixes
 
-- Test
+- test
 
 ### Miscellaneous Tasks
 
-- Test
+- test
 
 ## [0.3.3] - 2024-05-07
 
 ### Fixes
 
-- Sync main to dev
-- Test
-- Rerun
+- sync main to dev
+- test
+- rerun
 
 ### Miscellaneous Tasks
 
-- Github action test
-- Test
+- github action test
+- test
 
 ## [0.3.2] - 2024-05-03
 
 ### Miscellaneous Tasks
 
-- Fix git config
+- fix git config
 
 ## [0.3.1] - 2024-05-03
 
 ### Miscellaneous Tasks
 
-- Add bump action
-- Version checking
-- Python version checking
-- Python version checking
-- Python version checking
-- Git config
-- Permission
-- Add permission
+- add bump action
+- version checking
+- python version checking
+- python version checking
+- python version checking
+- git config
+- permission
+- add permission
 
 ## [0.3.0] - 2024-04-30
 
 ### Features
 
-- Test 1
+- test 1
 
 ### Fixes
 
-- Test 3
+- test 3
 
 ### Miscellaneous Tasks
 
-- Bump test
-- Test 3
+- bump test
+- test 3
 
 ## [0.2.6] - 2024-04-30
 
 ### Fixes
 
-- Test 4
+- test 4
 
 ## [0.2.5] - 2024-04-30
 
 ### Fixes
 
-- Test test
+- test test
 
 ## [0.2.4] - 2024-04-30
 
 ### Fixes
 
-- Version conflic test 2 (#12)
+- version conflic test 2 (#12)
 
 ## [0.2.3] - 2024-04-30
 
 ### Fixes
 
-- Version conflic test
+- version conflic test
 
 ## [0.2.2] - 2024-04-30
 
 ### Fixes
 
-- Test
-- Set env git config
+- test
+- set env git config
 
 ## [0.2.0] - 2024-04-30
 
 ### Features
 
-- Bump version
+- bump version
 
 ### Fixes
 
-- Dry run test
-- Dry run test 3
-- Next version check
-- Next versio test
-- Dry drty
-- Dry dry 2
-- Next version
-- Git config
-- Git config 2
-- Version file change test
+- dry run test
+- dry run test 3
+- next version check
+- next versio test
+- dry drty
+- dry dry 2
+- next version
+- git config
+- git config 2
+- version file change test
 
 ## [0.1.1] - 2024-04-30
 
 ### Fixes
 
-- Test test
-- Add permission
+- test test
+- add permission
 
 ### Miscellaneous Tasks
 
-- Bump version test 2
-- Bump version test 3
+- bump version test 2
+- bump version test 3
 
 ## [0.1.0] - 2024-04-30
 
 ### Fixes
 
-- Test commit 2
+- test commit 2
 
 ### Miscellaneous Tasks
 
-- Add commit msg checker
-- Remove test action
-- Change using env
-- Change using env
-- Test commit
-- Test commit
-- Test commit
-- Test commit
-- Test commit
-- Bump version test
-- Bump version test
-- *(release)* V0.1.0 [skip ci]
+- add commit msg checker
+- remove test action
+- change using env
+- change using env
+- test commit
+- test commit
+- test commit
+- test commit
+- test commit
+- bump version test
+- bump version test
+- *(release)* v0.1.0 [skip ci]
 
 <!-- generated by git-cliff -->
