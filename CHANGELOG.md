@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.35] - 2024-05-09
+
+### Fixes
+
+- Tag name fixed
+
 ## [0.3.34] - 2024-05-08
 
 ### Fixes
