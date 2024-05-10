@@ -58,7 +58,7 @@ jobs:
 
             if git tag -l | grep -qx "$TAG_NAME"; then
               echo "Tag $TAG_NAME already exists. break..."
-              if [ $TAG_NAME != v$NEW_VERSION ] ; then
+              if [ $TAG_NAME != v$CURRENT_VERSION ] ; then
                 break
               fi
             else
