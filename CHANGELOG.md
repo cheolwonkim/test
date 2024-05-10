@@ -1,5 +1,11 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.2.1] - 2024-05-10
+
+### Features
+
+- test test jㅏㅣㄴ엄나ㅣdjaskl어ㅏㅣㄴ머ㅏㅣㅓㅏㅣ
+
 ## [2.1.1] - 2024-05-10
 
 ### Features
