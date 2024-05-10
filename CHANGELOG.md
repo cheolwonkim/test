@@ -1,5 +1,21 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.0.12] - 2024-05-10
+
+### Fixes
+
+- readme 2 (#23)
+
+## [2.0.11] - 2024-05-10
+
+### Features
+
+- hihi (#24)
+
+### Fixes
+
+- fixfix
+
 ## [2.0.9] - 2024-05-10
 
 ### Fixes
@@ -78,7 +94,7 @@
 - main bump test 3
 - main push bump
 
-### Bump version
+### Major Bump
 
 - major upup
 
