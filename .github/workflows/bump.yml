@@ -33,10 +33,10 @@ jobs:
         run: |
           pip install bump2version
 
-      # - name: Set git config
-      #   run: |
-      #     git config --global user.email $USER_EMAIL
-      #     git config --global user.name $USER_NAME
+      - name: Set git config
+        run: |
+          git config --global user.email $USER_EMAIL
+          git config --global user.name $USER_NAME
 
       - name: Get version
         run: |
