@@ -135,7 +135,15 @@ jobs:
 
     - name: Find previous version tag
       run: |
-        previous_tag=$(git tag -l | sort -V | awk -v new_version="$NEW_VERSION" 'prev == new_version {print last; exit} {last = $0; prev = $0}')
+        tags=$(git tag -l | sort -V)
+
+        previous_tag=""
+        for tag in $tags; do
+          if [[ "$tag" == "v$NEW_VERSION" ]]; then
+            break
+          fi
+          previous_tag=$tag
+        done
         echo "PREVIOUS_TAG=$previous_tag" >> $GITHUB_ENV
         echo "Found previous tag: $previous_tag"
 
@@ -144,13 +152,13 @@ jobs:
       uses: mikepenz/release-changelog-builder-action@v4
       with:
         token: ${{ secrets.GH_TOKEN }}
-        fromTag: v2.3.3
-        toTag: v2.3.2
+        fromTag: v${{ env.NEW_VERSION }}
+        toTag: ${{ env.PREVIOUS_TAG }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-          tag: v$NEW_VERSION
+          tag: v${{ env.NEW_VERSION }}
           body: ${{steps.build_change_log.outputs.changelog}}
           generateReleaseNotes : true
           allowUpdates: true
