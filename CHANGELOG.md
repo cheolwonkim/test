@@ -1,5 +1,12 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.3.6] - 2024-05-10
+
+### Fixes
+
+- test
+- test
+
 ## [2.3.5] - 2024-05-10
 
 ### Fixes
