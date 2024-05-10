@@ -1,5 +1,11 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.0.12] - 2024-05-10
+
+### Fixes
+
+- readme 2 (#23)
+
 ## [2.0.11] - 2024-05-10
 
 ### Features
