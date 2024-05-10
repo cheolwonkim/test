@@ -1,55 +1,12 @@
 # Changelog
-## [0.3.47] - 2024-05-09
-
-### Fixes
-
-- read me
-
-## [0.3.43] - 2024-05-09
-
-### Fixes
-
-- test 5
-- test 6
-- test 7
-
-## [0.3.34] - 2024-05-08
-
-### Fixes
-
-- test 10101010
+## [2.0.1] - 2024-05-10
 
 ### Miscellaneous Tasks
 
-- modify github action
-- *(action/message-checker)* action & job name change
+- test commit
+- test commit 2
 
-## [0.3.41] - 2024-05-09
-
-### Fixes
-
-- delete changelog
-
-## [0.3.39] - 2024-05-09
-
-### Fixes
-
-- test
-- test 23
-
-## [0.3.38] - 2024-05-09
-
-### Miscellaneous Tasks
-
-- tag tag tag
-
-## [0.3.37] - 2024-05-09
-
-### Miscellaneous Tasks
-
-- tag test
-
-## [0.3.35] - 2024-05-09
+## [2.0.0] - 2024-05-09
 
 ### Features
 
@@ -59,6 +16,7 @@
 - generate change log
 - Changelog generator test git-cliff
 - *(README.md)* test 2
+- test
 
 ### Fixes
 
@@ -86,10 +44,48 @@
 - *(README.md)* test 4
 - all tagging
 - tag name fixed
+- test
+- test 23
+- delete changelog
+- test 10101010
+- test 5
+- test 6
+- test 7
+- read me
+- change cicicici
+- test 5
+- test 6
+- delete legacy code
+- set git config
+- new version
 
 ### Refactor
 
 - delete file
+- refactor test
+
+### Performance
+
+- perf test
+
+### Testing
+
+- test test
+
+### Miscellaneous Tasks
+
+- tag test
+- tag tag tag
+- modify github action
+- *(action/message-checker)* action & job name change
+- main bump test
+- main bump test 2
+- main bump test 3
+- main push bump
+
+### Bump version
+
+- major upup
 
 ## [0.3.17] - 2024-05-08
 
