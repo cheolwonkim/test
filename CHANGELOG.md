@@ -1,5 +1,37 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.3.4] - 2024-05-10
+
+### Features
+
+- pr test (#25)
+
+### Fixes
+
+- pr test 222222222222222222222222222 (#26)
+
+## [2.3.3] - 2024-05-10
+
+### Fixes
+
+- test 2
+
+### Miscellaneous Tasks
+
+- test
+
+## [2.3.2] - 2024-05-10
+
+### Fixes
+
+- test
+
+## [2.3.1] - 2024-05-10
+
+### Fixes
+
+- remove legacy code
+
 ## [2.2.2] - 2024-05-10
 
 ### Fixes
