@@ -1,5 +1,17 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.1.1] - 2024-05-10
+
+### Features
+
+- test 2
+- test 3
+
+### Fixes
+
+- test
+- test22
+
 ## [2.0.12] - 2024-05-10
 
 ### Fixes
@@ -11,6 +23,8 @@
 ### Features
 
 - hihi (#24)
+
+## [2.0.10] - 2024-05-10
 
 ### Fixes
 
