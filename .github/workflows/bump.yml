@@ -103,13 +103,6 @@ jobs:
     - name: Install tool
       run: pip install bump2version
 
-    - name: Get Previous tag
-      id: previoustag
-      uses: "WyriHaximus/github-action-get-previous-tag@v1"
-      env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        prefix: v
-
     - name: Get Next Version
       id: semver
       uses: ietf-tools/semver-action@v1
@@ -139,19 +132,19 @@ jobs:
         git push
         git push origin v$NEW_VERSION
 
+
     - name: Find previous version tag
       run: |
         tags=$(git tag -l | sort -V)
 
         previous_tag=""
         for tag in $tags; do
-          if [[ "$tag" == "v2.1.0" ]]; then
-            echo "Previous version before v2.1.0 is $previous_tag"
+          if [[ "$tag" == "v$NEW_VERSION" ]]; then
             break
           fi
           previous_tag=$tag
         done
-        echo PREVIOUS_TAG=$previous_tag >> $GITHUB_ENV
+        echo "PREVIOUS_TAG=$previous_tag" >> $GITHUB_ENV
         echo "Found previous tag: $previous_tag"
 
     - name: Build change log
@@ -165,7 +158,7 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-          tag: v$NEW_VERSION
+          tag: v${{ env.NEW_VERSION }}
           body: ${{steps.build_change_log.outputs.changelog}}
           generateReleaseNotes : true
           allowUpdates: true
