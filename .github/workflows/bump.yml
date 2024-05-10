@@ -132,19 +132,11 @@ jobs:
         git push
         git push origin v$NEW_VERSION
 
+
     - name: Find previous version tag
       run: |
-        tags=$(git tag -l | sort -V)
-
-        previous_tag=""
-        for tag in $tags; do
-          if [[ "$tag" == "v2.1.0" ]]; then
-            echo "Previous version before v2.1.0 is $previous_tag"
-            break
-          fi
-          previous_tag=$tag
-        done
-        echo PREVIOUS_TAG=$previous_tag >> $GITHUB_ENV
+        previous_tag=$(git tag -l | sort -V | awk -v new_version="$NEW_VERSION" 'prev == new_version {print last; exit} {last = $0; prev = $0}')
+        echo "PREVIOUS_TAG=$previous_tag" >> $GITHUB_ENV
         echo "Found previous tag: $previous_tag"
 
     - name: Build change log
