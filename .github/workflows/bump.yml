@@ -83,28 +83,59 @@ jobs:
           git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
           git push
 
-  # bump-main-version:
+  bump-main-version:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'skip bump')
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/main'
+    - name: Set git config
+      run: |
+        git config --global user.email $USER_EMAIL
+        git config --global user.name $USER_NAME
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: '3.10'
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
 
-  #     - name: Install version management tool
-  #       run: pip install bump2version
+    - name: Install tool
+      run: pip install bump2version
 
-  #     - name: Update version
-  #       run: |
-  #         git config --local user.email $USER_EMAIL
-  #         git config --local user.name $USER_NAME
-  #         bump2version patch --allow-dirty
+    - name: Get Previous tag
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        prefix: v
 
-  #     - name: Tag version
-  #       run: |
-  #         git push --follow-tags
-  #         git remote set-url origin https://actions:${{ secrets.GITHUB_TOKEN }}@github.com/cheolwonkim/test.git
+    - name: Get Next Version
+      id: semver
+      uses: ietf-tools/semver-action@v1
+      with:
+        token: ${{ github.token }}
+        branch: main
+        majorList: break
+        minorList: feat
+        patchList: fix, perf, refactor
+
+    - name: Get version
+      run: |
+        VERSION=$(grep 'current_version =' .bumpversion.cfg | cut -d ' ' -f 3)
+        echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Bump version
+      id: version_info
+      run: |
+        NEW_VERSION=$(bump2version ${{ steps.semver.outputs.bump }} --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+    - name: Commit changes
+      run: |
+        git add .
+        git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
+        git tag v$NEW_VERSION
+        git push
+        git push origin v$NEW_VERSION

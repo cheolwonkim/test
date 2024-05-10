@@ -1,0 +1,15 @@
+name: Convention Checker
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  PR-Title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR title check
+        run: |
+          echo "1"
