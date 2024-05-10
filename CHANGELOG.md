@@ -1,4 +1,10 @@
 # Changelog
+## [2.0.4] - 2024-05-10
+
+### Fixes
+
+- modify each tag bump version commit 2
+
 ## [2.0.2] - 2024-05-10
 
 ### Fixes
