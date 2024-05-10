@@ -5,8 +5,6 @@
 
 - modify each tag bump version commit
 
-## [2.0.1] - 2024-05-10
-
 ### Miscellaneous Tasks
 
 - test commit
