@@ -138,3 +138,35 @@ jobs:
         git tag v$NEW_VERSION
         git push
         git push origin v$NEW_VERSION
+
+    - name: Find previous version tag
+      run: |
+        tags=$(git tag -l | sort -V)
+
+        previous_tag=""
+        for tag in $tags; do
+          if [[ "$tag" == "v2.1.0" ]]; then
+            echo "Previous version before v2.1.0 is $previous_tag"
+            break
+          fi
+          previous_tag=$tag
+        done
+        echo PREVIOUS_TAG=$previous_tag >> $GITHUB_ENV
+        echo "Found previous tag: $previous_tag"
+
+    - name: Build change log
+      id: build_change_log
+      uses: mikepenz/release-changelog-builder-action@v4
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        fromTag: v$NEW_VERSION
+        toTag: $PREVIOUS_TAG
+
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+          tag: v$NEW_VERSION
+          body: ${{steps.build_change_log.outputs.changelog}}
+          generateReleaseNotes : true
+          allowUpdates: true
+          makeLatest: true
