@@ -57,10 +57,7 @@ jobs:
             TAG_NAME="v$NEW_VERSION_TMP"
 
             if git tag -l | grep -qx "$TAG_NAME"; then
-              echo "Tag $TAG_NAME already exists. break..."
-              if [ $TAG_NAME != v$CURRENT_VERSION ] ; then
-                break
-              fi
+              echo "Tag $TAG_NAME already exists."
             else
               echo "Creating tag $TAG_NAME for commit $COMMIT_HASH"
               git tag $TAG_NAME $COMMIT_HASH -m "Tagging version $TAG_NAME"
