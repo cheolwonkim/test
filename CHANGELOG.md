@@ -1,5 +1,15 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.2.2] - 2024-05-10
+
+### Fixes
+
+- sdfjkl;asdjfklasdjfklasdfjklsa
+
+### Refactor
+
+- asdasdasdasdasdasdasd
+
 ## [2.2.1] - 2024-05-10
 
 ### Features
