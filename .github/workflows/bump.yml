@@ -159,8 +159,8 @@ jobs:
       uses: mikepenz/release-changelog-builder-action@v4
       with:
         token: ${{ secrets.GH_TOKEN }}
-        fromTag: v$NEW_VERSION
-        toTag: $PREVIOUS_TAG
+        fromTag: v${{ env.NEW_VERSION }}
+        toTag: ${{ env.PREVIOUS_TAG }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
