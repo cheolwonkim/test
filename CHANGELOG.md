@@ -1,6 +1,10 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
-## [2.0.10] - 2024-05-10
+## [2.0.11] - 2024-05-10
+
+### Features
+
+- hihi (#24)
 
 ### Fixes
 
