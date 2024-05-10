@@ -23,7 +23,7 @@ body = """
     {% for commit in commits %}
         - {% if commit.scope %}*({{ commit.scope }})* {% endif %}\
             {% if commit.breaking %}[**breaking**] {% endif %}\
-            {{ commit.message }}\
+            {{ commit.message }} {{ commit.committer.email }}\
     {% endfor %}
 {% endfor %}\n
 """
