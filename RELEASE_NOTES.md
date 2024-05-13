@@ -4,11 +4,19 @@
 
 ### Fixes
 
-- test (#28)
+- release nodes (#29)
+
+## [2.4.3] - 2024-05-13
 
 ### Miscellaneous Tasks
 
 - change method dev versionging
+
+## [2.4.2] - 2024-05-13
+
+### Fixes
+
+- test (#28)
 
 ## [2.4.0] - 2024-05-10
 
