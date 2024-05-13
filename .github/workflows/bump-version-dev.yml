@@ -14,7 +14,6 @@ permissions:
 
 jobs:
   bump-dev-version:
-    # needs: set-environment
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'Bump version')
     steps:
@@ -80,85 +79,3 @@ jobs:
           git tag -d v$NEW_VERSION
           git tag v$NEW_VERSION
           git push origin $NEW_VERSION_TAG
-
-  # bump-main-version:
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'hotfix')
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #     with:
-  #       fetch-depth: 0
-
-  #   - name: Set git config
-  #     run: |
-  #       git config --global user.email $USER_EMAIL
-  #       git config --global user.name $USER_NAME
-
-  #   - name: Set up Python
-  #     uses: actions/setup-python@v5
-  #     with:
-  #       python-version: '3.10'
-
-  #   - name: Install tool
-  #     run: pip install bump2version
-
-  #   - name: Get Next Version
-  #     id: semver
-  #     uses: ietf-tools/semver-action@v1
-  #     with:
-  #       token: ${{ github.token }}
-  #       branch: main
-  #       majorList: break
-  #       minorList: feat
-  #       patchList: fix, perf, refactor
-
-  #   - name: Get version
-  #     run: |
-  #       VERSION=$(grep 'current_version =' .bumpversion.cfg | cut -d ' ' -f 3)
-  #       echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
-
-  #   - name: Bump version
-  #     id: version_info
-  #     run: |
-  #       NEW_VERSION=$(bump2version ${{ steps.semver.outputs.bump }} --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
-  #       echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-  #   - name: Commit changes
-  #     run: |
-  #       git add .
-  #       git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
-  #       git tag v$NEW_VERSION
-  #       git push
-  #       git push origin v$NEW_VERSION
-
-
-  #   - name: Find previous version tag
-  #     run: |
-  #       tags=$(git tag -l | sort -V)
-
-  #       previous_tag=""
-  #       for tag in $tags; do
-  #         if [[ "$tag" == "v$NEW_VERSION" ]]; then
-  #           break
-  #         fi
-  #         previous_tag=$tag
-  #       done
-  #       echo "PREVIOUS_TAG=$previous_tag" >> $GITHUB_ENV
-  #       echo "Found previous tag: $previous_tag"
-
-  #   - name: Build change log
-  #     id: build_change_log
-  #     uses: mikepenz/release-changelog-builder-action@v4
-  #     with:
-  #       token: ${{ secrets.GH_TOKEN }}
-  #       fromTag: v${{ env.NEW_VERSION }}
-  #       toTag: ${{ env.PREVIOUS_TAG }}
-
-  #   - name: Create release
-  #     uses: ncipollo/release-action@v1
-  #     with:
-  #         tag: v${{ env.NEW_VERSION }}
-  #         body: ${{steps.build_change_log.outputs.changelog}}
-  #         generateReleaseNotes : true
-  #         allowUpdates: true
-  #         makeLatest: true
