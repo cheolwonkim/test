@@ -1,5 +1,12 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.6.1] - 2024-05-13
+
+### Fixes
+
+- release note
+- reerlerlerlelre
+
 ## [2.6.0] - 2024-05-13
 
 ### Features
