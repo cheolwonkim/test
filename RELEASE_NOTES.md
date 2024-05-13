@@ -1,6 +1,12 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
-## [unreleased]
+## [2.4.5] - 2024-05-13
+
+### Fixes
+
+- *(README.md)* test (#30)
+
+## [2.4.4] - 2024-05-13
 
 ### Fixes
 
