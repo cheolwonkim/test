@@ -1,5 +1,15 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.7.0] - 2024-05-13
+
+### Features
+
+- test 1
+
+### Fixes
+
+- test 2
+
 ## [2.6.1] - 2024-05-13
 
 ### Fixes
