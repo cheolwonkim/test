@@ -55,7 +55,8 @@ jobs:
       - name: Bump version
         id: version_info
         run: |
-          NEW_VERSION=$(bump2version ${{ steps.semver.outputs.bump }} --no-commit --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+          NEW_VERSION=$(bump2version ${{ steps.semver.outputs.bump }} --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+          git tag v$NEW_VERSION
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "NEW_VERSION_TAG=v$NEW_VERSION" >> $GITHUB_ENV
 
