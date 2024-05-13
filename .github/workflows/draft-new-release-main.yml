@@ -1,9 +1,8 @@
-name: Versioning
+name: Draft a new release
 
 on:
   push:
     branches:
-      - dev
       - main
 
 env:
@@ -14,76 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  bump-dev-version:
-    # needs: set-environment
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'Bump version')
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Install tools
-        run: |
-          pip install bump2version
-
-      - name: Set git config
-        run: |
-          git config --global user.email $USER_EMAIL
-          git config --global user.name $USER_NAME
-
-      - name: Get version
-        run: |
-          VERSION=$(grep 'current_version =' .bumpversion.cfg | cut -d ' ' -f 3)
-          echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Bump version
-        id: version_info
-        run: |
-          NEW_VERSION=$(bump2version patch --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
-          git tag v$NEW_VERSION
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      - name: Tag each Bump version commit
-        run: |
-          git log --format="%H %s" | grep -P 'Bump version: \S+ to \S+' | while read line; do
-            COMMIT_HASH=$(echo $line | cut -d ' ' -f1)
-            NEW_VERSION_TMP=$(echo $line | grep -oP 'to \K\S+')
-            TAG_NAME="v$NEW_VERSION_TMP"
-
-            if git tag -l | grep -qx "$TAG_NAME"; then
-              echo "Tag $TAG_NAME already exists."
-            else
-              echo "Creating tag $TAG_NAME for commit $COMMIT_HASH"
-              git tag $TAG_NAME $COMMIT_HASH -m "Tagging version $TAG_NAME"
-            fi
-          done
-
-      - name: Generate CHANGELOG.md
-        uses: orhun/git-cliff-action@v3.0.2
-        id: git-cliff
-        with:
-          config: '.cliff.toml'
-          args: --verbose
-        env:
-          OUTPUT: CHANGELOG.md
-
-      - name: Print the changelog
-        run: cat "${{ steps.git-cliff.outputs.changelog }}"
-
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
-          git push
-
-  bump-main-version:
+  generate-release:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'hotfix')
     steps:
