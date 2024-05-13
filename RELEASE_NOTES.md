@@ -1,5 +1,11 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [unreleased]
+
+### Features
+
+- test (#31)
+
 ## [2.4.5] - 2024-05-13
 
 ### Fixes
