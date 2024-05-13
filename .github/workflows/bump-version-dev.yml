@@ -15,7 +15,7 @@ permissions:
 jobs:
   bump-dev-version:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'Bump version')
+    if: github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'Bump version') && !contains(github.event.head_commit.message, 'skip bump')
     steps:
       - uses: actions/checkout@v4
         with:
