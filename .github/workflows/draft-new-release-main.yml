@@ -12,10 +12,14 @@ env:
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   generate-release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'skip bump') && !contains(github.event.head_commit.message, 'hotfix')
+    if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'ci-skip') && !contains(github.event.head_commit.message, 'bump-skip') && !contains(github.event.head_commit.message, 'hotfix')
     steps:
     - uses: actions/checkout@v4
       with:
