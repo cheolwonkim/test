@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/cheolwonkim/pre-commit.git
-  rev: v0.0.2
+  rev: v0.0.3
   hooks:
     - id: conventional-commit-check
       stages:
