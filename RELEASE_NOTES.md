@@ -1,5 +1,12 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.7.2] - 2024-05-14
+
+### Fixes
+
+- test
+- *(README.md)* test
+
 ## [2.7.1] - 2024-05-14
 
 ### Fixes
