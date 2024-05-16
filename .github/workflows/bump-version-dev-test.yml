@@ -1,0 +1,36 @@
+name: Bump version test
+
+on:
+  push:
+    branches:
+      - test
+
+env:
+  USER_EMAIL: cwkim@deepx.ai
+  USER_NAME: cwkimDO
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  bump-dev-version:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'ci-skip') && !contains(github.event.head_commit.message, 'bump-skip')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install tools
+        run: |
+          pip install bump2version
