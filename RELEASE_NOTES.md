@@ -1,6 +1,19 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
-## [2.7.2] - 2024-05-14
+## [2.7.3] - 2024-05-16
+
+### Fixes
+
+- test test test (#41)
+
+### Miscellaneous Tasks
+
+- dev to main merge
+- dev to main merge 2
+- dev to main merge 3
+- dev to main merge 4
+
+## [2.7.2] - 2024-05-16
 
 ### Fixes
 
