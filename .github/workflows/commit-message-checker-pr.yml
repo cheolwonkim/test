@@ -1,5 +1,5 @@
 name: convention-checker
-run-name: ${{ github.event.pull_request.number  }} - convention checker
+run-name: "PR #${{ github.event.pull_request.number  }} - convention checker"
 
 on:
   pull_request:
