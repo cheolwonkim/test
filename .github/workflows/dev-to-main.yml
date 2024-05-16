@@ -18,6 +18,10 @@ on:
 
 permissions: write-all
 
+env:
+  USER_EMAIL: cwkim@deepx.ai
+  USER_NAME: cwkimDO
+
 jobs:
     check:
       name: check
@@ -50,6 +54,10 @@ jobs:
           with:
             script: core.setFailed("${{github.event.inputs.target_commit}} does not exists on dev")
 
+        - name: Set git config
+          run: |
+            git config --global user.email $USER_EMAIL
+            git config --global user.name $USER_NAME
 
         - name: Rebase target commit to main
           run: git rebase ${{ github.event.inputs.target_commit }}
