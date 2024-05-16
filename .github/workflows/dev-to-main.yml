@@ -24,11 +24,6 @@ jobs:
       runs-on: ubuntu-latest
       timeout-minutes: 5
       steps:
-        - name: clean
-          run: |
-            sudo rm -rf ${{ github.workspace }}
-            mkdir -p ${{ github.workspace }}
-
         - name: checkout
           uses: actions/checkout@v4
           with:
@@ -55,35 +50,24 @@ jobs:
           with:
             script: core.setFailed("${{github.event.inputs.target_commit}} does not exists on dev")
 
-    rebase:
-        name: rebase
-        needs: check
-        if: needs.check.result == 'success'
-        runs-on: ubuntu-latest
-        timeout-minutes: 5
-        steps:
 
-          - name: Fetch and rebase dev branch
-            run: |
-              git fetch origin dev
+        - name: Rebase target commit to main
+          run: git rebase ${{ github.event.inputs.target_commit }}
 
-          - name: Rebase target commit to main
-            run: git rebase ${{ github.event.inputs.target_commit }}
+        - name: Push main
+          if: ${{ github.event.inputs.push_force == 'false' }}
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GH_TOKEN }}
+            branch: main
 
-          - name: Push main
-            if: ${{ github.event.inputs.push_force == 'false' }}
-            uses: ad-m/github-push-action@master
-            with:
-              github_token: ${{ secrets.GH_TOKEN }}
-              branch: main
-
-          - name: Push main forceably
-            if: ${{ github.event.inputs.push_force == 'true' }}
-            uses: ad-m/github-push-action@master
-            with:
-              github_token: ${{ secrets.GH_TOKEN }}
-              branch: main
-              force: true
+        - name: Push main forceably
+          if: ${{ github.event.inputs.push_force == 'true' }}
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GH_TOKEN }}
+            branch: main
+            force: true
 
     # tag:
     #   name: tag
