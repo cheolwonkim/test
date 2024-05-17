@@ -1,5 +1,15 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.8.0] - 2024-05-17
+
+### Features
+
+- test 3
+
+### Fixes
+
+- test 4
+
 ## [2.7.4] - 2024-05-17
 
 ### Fixes
