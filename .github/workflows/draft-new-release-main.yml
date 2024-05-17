@@ -25,6 +25,23 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Install GitHub CLI
+      run: sudo apt-get install -y gh
+
+    - name: Authenticate GitHub CLI
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh auth login --with-token < $GH_TOKEN
+
+    - name: Get latest release tag
+      run: |
+        LATEST_TAG=$(gh release list --limit 1 | awk '{print $3}')
+        echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+    - name: Print latest tag
+      run: |
+        echo "The latest tag is ${{ env.LATEST_TAG }}"
+
     - name: Set git config
       run: |
         git config --global user.email $USER_EMAIL
@@ -40,19 +57,13 @@ jobs:
         VERSION=$(grep 'current_version =' .bumpversion.cfg | cut -d ' ' -f 3)
         echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Find previous version tag
-      run: |
-        PREVIOUS_TAG=$(git describe --tags --abbrev=0)
-        echo "PREVIOUS_TAG=$PREVIOUS_TAG" >> $GITHUB_ENV
-        echo "PREVIOUS_TAG: $PREVIOUS_TAG"
-
     - name: Build change log
       id: build_change_log
       uses: mikepenz/release-changelog-builder-action@v4
       with:
         token: ${{ secrets.GH_TOKEN }}
         fromTag: v${{ env.CURRENT_VERSION }}
-        toTag: ${{ env.PREVIOUS_TAG }}
+        toTag: ${{ env.LATEST_TAG }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
