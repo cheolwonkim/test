@@ -42,17 +42,8 @@ jobs:
 
     - name: Find previous version tag
       run: |
-        tags=$(git tag -l | sort -V)
-
-        previous_tag=""
-        for tag in $tags; do
-          if [[ "$tag" == "v$CURRENT_VERSION" ]]; then
-            break
-          fi
-          previous_tag=$tag
-        done
-        echo "PREVIOUS_TAG=$previous_tag" >> $GITHUB_ENV
-        echo "Found previous tag: $previous_tag"
+        echo "PREVIOUS_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        echo "PREVIOUS_TAG: $PREVIOUS_TAG"
 
     - name: Build change log
       id: build_change_log
