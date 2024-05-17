@@ -8,6 +8,7 @@ on:
 env:
   USER_EMAIL: cwkim@deepx.ai
   USER_NAME: cwkimDO
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 permissions:
   contents: write
