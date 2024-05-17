@@ -42,7 +42,8 @@ jobs:
 
     - name: Find previous version tag
       run: |
-        echo "PREVIOUS_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        PREVIOUS_TAG=$(git describe --tags --abbrev=0)
+        echo "PREVIOUS_TAG=$PREVIOUS_TAG" >> $GITHUB_ENV
         echo "PREVIOUS_TAG: $PREVIOUS_TAG"
 
     - name: Build change log
