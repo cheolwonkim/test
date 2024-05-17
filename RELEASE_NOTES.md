@@ -1,5 +1,12 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.8.9] - 2024-05-17
+
+### Fixes
+
+- ci
+- ci 2
+
 ## [2.8.8] - 2024-05-17
 
 ### Fixes
