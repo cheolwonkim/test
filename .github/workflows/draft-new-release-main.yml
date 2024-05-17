@@ -33,7 +33,6 @@ jobs:
 
     - name: Get latest release tag
       run: |
-        gh release list
         LATEST_TAG=$(gh release list --limit 1 | awk '{print $3}')
         echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
