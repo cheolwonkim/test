@@ -1,5 +1,15 @@
 # Changelog
 ### Do not edit. This document is generated automatically.
+## [2.8.4] - 2024-05-17
+
+### Fixes
+
+- test 333
+
+### Miscellaneous Tasks
+
+- test
+
 ## [2.8.3] - 2024-05-17
 
 ### Fixes
