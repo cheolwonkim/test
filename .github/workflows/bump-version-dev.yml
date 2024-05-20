@@ -43,7 +43,7 @@ jobs:
       - name: PR number from commit message
         id: pr_info
         run: |
-          COMMIT_MESSAGE=${{ github.event.head_commit.message }}
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
           if [[ $COMMIT_MESSAGE =~ #[0-9]+ ]]; then
             PR_NUMBER=${BASH_REMATCH[0]#\#}
             PR_URL="https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
