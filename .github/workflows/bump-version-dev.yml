@@ -40,6 +40,19 @@ jobs:
           git config --global user.email $USER_EMAIL
           git config --global user.name $USER_NAME
 
+      - name: PR number from commit message
+        id: pr_info
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          if [[ $COMMIT_MESSAGE =~ #[0-9]+ ]]; then
+            PR_NUMBER=${BASH_REMATCH[0]#\#}
+            PR_URL="https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
+          else
+            PR_NUMBER=""
+            PR_URL=""
+          fi
+          echo "PR_URL=$PR_URL" >> $GITHUB_ENV
+
       - name: Get version
         run: |
           VERSION=$(grep 'current_version =' .bumpversion.cfg | cut -d ' ' -f 3)
@@ -58,7 +71,7 @@ jobs:
       - name: Bump version
         id: version_info
         run: |
-          NEW_VERSION=$(bump2version ${{ steps.semver.outputs.bump }} --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
+          NEW_VERSION=$(al ${{ steps.semver.outputs.bump }} --no-commit --no-tag --list | grep new_version | sed -r 's/new_version=(.*)/\1/')
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           echo "NEW_VERSION_TAG=v$NEW_VERSION" >> $GITHUB_ENV
           git tag v$NEW_VERSION
@@ -81,5 +94,5 @@ jobs:
           git commit -m "Bump version: $CURRENT_VERSION to $NEW_VERSION"
           git push
           git tag -d v$NEW_VERSION
-          git tag v$NEW_VERSION
+          git tag -a v$NEW_VERSION -m "$PR_URL"
           git push origin $NEW_VERSION_TAG
