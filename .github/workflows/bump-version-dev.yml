@@ -40,12 +40,12 @@ jobs:
           git config --global user.email $USER_EMAIL
           git config --global user.name $USER_NAME
 
-      - name: PR number from commit message
+      - name: Extract PR number from commit message
         id: pr_info
         run: |
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-          if [[ $COMMIT_MESSAGE =~ #[0-9]+ ]]; then
-            PR_NUMBER=${BASH_REMATCH[0]#\#}
+          if [[ "$COMMIT_MESSAGE" =~ \#([0-9]+) ]]; then
+            PR_NUMBER="${BASH_REMATCH[1]}"
             PR_URL="https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
           else
             PR_NUMBER=""
